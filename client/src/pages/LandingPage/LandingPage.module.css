@@ -1,0 +1,59 @@
+
+.ch1{
+    background-color: #662249;
+    width: 500px;
+    height: 100vh;
+    margin: 10px 10px 10px 0px;
+    padding: 2%;
+}
+
+.ch2{
+    background-color: #413B61;
+    width: 100%;
+    height: 100vh;
+    margin: 10px 10px 10px 0px;
+}
+.profile h3{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 10px;
+     text-decoration: underline;
+     color: wheat;
+}
+.profile h4{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: wheat;
+  
+}
+.buttonStyle {
+    display: block;
+    width: 220px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    text-decoration: none;
+    background-color: #F09819;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+
+    /* Add these: */
+    cursor: pointer; /* Ensures it's clickable */
+    outline: none; /* Prevents default focus styles */
+    border: none; /* Removes default button border */
+}
+
+.buttonStyle:hover{
+    height: 50px;
+    border: 1px solid white;
+    background-color: #522C5D;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+
+}
+.buttonStyle span{
+    padding-top: 5px;
+}

@@ -1,0 +1,15 @@
+user role = 0 for students 
+user role = 1 for admin
+user role = 2 for inactive or graduated students
+
+
+
+
+
+TASK 
+crosscheck the controller along with the modified things like vendor ... enums added etc
+gas and chemical consumed controller figure out how to do it 
+authentication 
+dashboard 
+  1.on login user will find (add chemical, add Gas , add consumable , search chemicals , search gas, search consumable,)
+    for admin (including the above.. delete profile, )

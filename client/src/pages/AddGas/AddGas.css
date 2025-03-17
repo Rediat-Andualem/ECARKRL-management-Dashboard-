@@ -1,0 +1,48 @@
+
+.label{
+    display: block;
+    max-width: 100vh;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color:#fe8402;
+    height: 2rem;
+    margin: 0.5rem auto;
+    font-family: 'Rubik Marker Hatch', cursive;
+}
+
+.label:hover{
+    color: #fe8402;
+    border: 2px #fe8402 solid ;
+    background-color:#007bff;
+}
+
+
+    .forUploadingFile{
+        display: none !important;
+    }
+    
+    #fileUpload{
+        display: none;
+    }
+
+    .retouch{
+        height: 700px !important;
+        width: 100%;
+    } 
+
+    .select-custom {
+    
+        outline: 0.5px solid  blue;
+      }
+    
+
+     select option:nth-child(odd) {
+        background-color: #f8f8f8; /* Light gray */
+    }
+    
+    select option:nth-child(even) {
+        background-color: #c0c0c0; /* Silver */
+    }
