@@ -18,12 +18,12 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors({
-    origin : 'http://localhost:5173',
+    origin : true,
     // credentials:true
 }))
 
 // * main routes 
-app.use(Route)
+app.use('/api',Route)
 
 
 // *connection  and server listening

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS chemicals (
     'LIQUID-U-V','LIQUID-W-X','LIQUID-Y-Z'
   ) NOT NULL,
   chemical_ordered_by VARCHAR(255) NOT NULL,
-  chemical_delivered_date TIMESTAMP NOT NULL,
+  chemical_delivered_date TIMESTAMP  NULL,
   chemical_priority ENUM('High','Low') NOT NULL,
   chemical_bill_path VARCHAR(255) DEFAULT 'not provided',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

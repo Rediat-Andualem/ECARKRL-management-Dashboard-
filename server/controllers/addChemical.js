@@ -70,88 +70,192 @@ import connectionInfo from "../schema/db.config.js";
 
 
 // Helper function for validation
-const validateChemicalFields = (data) => {
-    const isStringRegex = /^[A-Za-z\s]+$/;
+// const validateChemicalFields = (data) => {
+//     const isStringRegex = /^[A-Za-z\s]+$/;
+//     const isNumberRegex = /^\d+$/;
+//     const monthAndYear = /^(0[1-9]|1[0-2])\/\d{4}$/;
+
+//     if (!data.chemicalName || !data.chemicalFormula || !data.chemicalPurity || !data.chemicalManufacturer || 
+//         !data.chemicalState || !data.chemicalPackaging || !data.chemicalAmount || !data.chemicalExpireDate || 
+//         !data.chemicalLocation || !data.chemicalOrderedBy || !data.chemicalPriority || !data.unitOfMeasurement || data.vendorName) {
+//         return "All input fields are required";
+//     }
+
+//     if (!isStringRegex.test(data.chemicalName) || !isStringRegex.test(data.chemicalOrderedBy)) {
+//         return "Chemical name and Chemical ordered by fields should only contain alphabets";
+//     }
+
+//     if (!isNumberRegex.test(data.chemicalAmount)) {
+//         return "Chemical amount field should only contain numbers";
+//     }
+
+//     if (!isNumberRegex.test(data.chemicalPurity)) {
+//         return "Chemical purity field should only contain numbers";
+//     }
+
+//     if (!monthAndYear.test(data.chemicalExpireDate)) {
+//         return "Please check your expire date input, it should be passed like '06/2024' (MM/YYYY)";
+//     }
+
+//     return null; 
+// };
+
+// export let addChemicals = async (req, res) => {
+//    const {chemicalName,chemicalFormula,chemicalPurity,chemicalManufacturer,chemicalState,chemicalAmount,unitOfMeasurement,chemicalLocation,chemicalOrderedBy,vendorName,chemicalPackaging,chemicalExpireDate,chemicalPriority,} = req.body
+//     const imageFilePath = req.file ? req.file.path : 'not provided';
+   
+// console.log(req.body)
+//     // Validate the fields
+//     const validationError = validateChemicalFields(req.body);
+//     if (validationError) {
+//         return res.status(400).json({ message: validationError });
+//     }
+
+//     const insertChemicalQuery = `
+//         INSERT INTO chemicals(chemical_name, chemical_formula, chemical_purity, chemical_manufacturer, chemical_vender_name,
+//         chemical_state, chemical_packaging, chemical_amount,chemical_unit_of_measurement, chemical_expire_date, chemical_location, 
+//         chemical_ordered_by,chemical_delivered_date,chemical_priority,chemical_bill_path) 
+//         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)
+//     `;
+
+//     const values = [
+//         chemical_name = chemicalName,
+//         chemical_formula =chemicalFormula ,
+//         chemical_purity =chemicalPurity ,
+//         chemical_manufacturer =chemicalManufacturer,
+//         chemical_vender_name =vendorName ,
+//         chemical_state=chemicalState,
+//         chemical_packaging=chemicalPackaging,
+//         chemical_amount=chemicalAmount,
+//         chemical_unit_of_measurement=unitOfMeasurement,
+//         chemical_expire_date=chemicalExpireDate,
+//         chemical_location=chemicalLocation,
+//         chemical_ordered_by=chemicalOrderedBy,
+//         chemical_delivered_date,
+//         chemical_priorit=chemicalPriority,
+//         imageFilePath
+//     ];
+
+//     try {
+//         // Use Promise-based query execution
+//         await new Promise((resolve, reject) => {
+//             connectionInfo.query(insertChemicalQuery, values, (err) => {
+//                 if (err) {
+//                     reject(err);
+//                 } else {
+//                     resolve();
+//                 }
+//             });
+//         });
+
+//         res.send({
+//             messageToTheFront: 'New Chemical added successfully',
+//             navigation: '/home',
+//             messageToUser: 'Click here for home page',
+//         });
+
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send({
+//             message: "Something went wrong while adding the chemical, please try again",
+//         });
+//     }
+// };
+
+
+
+
+
+
+export const validateChemicalFields = (data) => { 
+ const isStringRegex = /^[A-Za-z\s]+$/;
     const isNumberRegex = /^\d+$/;
     const monthAndYear = /^(0[1-9]|1[0-2])\/\d{4}$/;
 
-    if (!data.chemical_name || !data.chemical_formula || !data.chemical_purity || !data.chemical_manufacturer || 
-        !data.chemical_state || !data.chemical_packaging || !data.chemical_amount || !data.chemical_expire_date || 
-        !data.chemical_location || !data.chemical_ordered_by || !data.chemical_priority || !data.chemical_unit_of_measurement) {
+    // 🛑 vendorName is MISSING in your check! Fix it:
+    if (!data.chemicalName || !data.chemicalFormula || !data.chemicalPurity || !data.chemicalManufacturer || 
+        !data.chemicalState || !data.chemicalPackaging || !data.chemicalAmount || !data.chemicalExpireDate || 
+        !data.chemicalLocation || !data.chemicalOrderedBy || !data.chemicalPriority || !data.unitOfMeasurement || !data.vendorName) {
         return "All input fields are required";
     }
 
-    if (!isStringRegex.test(data.chemical_name) || !isStringRegex.test(data.chemical_ordered_by)) {
+    if (!isStringRegex.test(data.chemicalName) || !isStringRegex.test(data.chemicalOrderedBy)) {
         return "Chemical name and Chemical ordered by fields should only contain alphabets";
     }
 
-    if (!isNumberRegex.test(data.chemical_amount)) {
+    if (!isNumberRegex.test(data.chemicalAmount)) {
         return "Chemical amount field should only contain numbers";
     }
 
-    if (!isNumberRegex.test(data.chemical_purity)) {
+    if (!isNumberRegex.test(data.chemicalPurity)) {
         return "Chemical purity field should only contain numbers";
     }
 
-    if (!monthAndYear.test(data.chemical_expire_date)) {
+    if (!monthAndYear.test(data.chemicalExpireDate)) {
         return "Please check your expire date input, it should be passed like '06/2024' (MM/YYYY)";
     }
 
-    return null; // No validation errors
+    return null; 
 };
 
+
 export let addChemicals = async (req, res) => {
-    const imageFilePath = req.file ? req.file.path : 'not provided';
     const {
-        chemical_name,
-        chemical_formula,
-        chemical_purity,
-        chemical_manufacturer,
-        chemical_vender_name,
-        chemical_state,
-        chemical_packaging,
-        chemical_amount,
-        chemical_unit_of_measurement,
-        chemical_expire_date,
-        chemical_location,
-        chemical_ordered_by,
-        chemical_delivered_date,
-        chemical_priority,
+        chemicalName,
+        chemicalFormula,
+        chemicalPurity,
+        chemicalManufacturer,
+        chemicalState,
+        chemicalAmount,
+        unitOfMeasurement,
+        chemicalLocation,
+        chemicalOrderedBy,
+        vendorName,
+        chemicalPackaging,
+        chemicalExpireDate,
+        chemicalPriority,
     } = req.body;
 
-    // Validate the fields
+    const imageFilePath = req.file ? req.file.path : 'not provided';
+
+
+    // Validate fields
     const validationError = validateChemicalFields(req.body);
     if (validationError) {
         return res.status(400).json({ message: validationError });
     }
 
     const insertChemicalQuery = `
-        INSERT INTO chemicals(chemical_name, chemical_formula, chemical_purity, chemical_manufacturer, chemical_vender_name,
-        chemical_state, chemical_packaging, chemical_amount,chemical_unit_of_measurement, chemical_expire_date, chemical_location, 
-        chemical_ordered_by,chemical_delivered_date,chemical_priority,chemical_bill_path) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)
+        INSERT INTO chemicals(
+            chemical_name, chemical_formula, chemical_purity, chemical_manufacturer, chemical_vender_name,
+            chemical_state, chemical_packaging, chemical_amount, chemical_unit_of_measurement, 
+            chemical_expire_date, chemical_location, chemical_ordered_by, 
+            chemical_delivered_date, chemical_priority, chemical_bill_path
+        ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
+    const chemicalDeliveredDate = new Date(); 
+
     const values = [
-        chemical_name,
-        chemical_formula,
-        chemical_purity,
-        chemical_manufacturer,
-        chemical_vender_name,
-        chemical_state,
-        chemical_packaging,
-        chemical_amount,
-        chemical_unit_of_measurement,
-        chemical_expire_date,
-        chemical_location,
-        chemical_ordered_by,
-        chemical_delivered_date,
-        chemical_priority,
+        chemicalName,
+        chemicalFormula,
+        chemicalPurity,
+        chemicalManufacturer,
+        vendorName,
+        chemicalState,
+        chemicalPackaging,
+        chemicalAmount,
+        unitOfMeasurement,
+        chemicalExpireDate,
+        chemicalLocation,
+        chemicalOrderedBy,
+        chemicalDeliveredDate,
+        chemicalPriority,
         imageFilePath
     ];
 
     try {
-        // Use Promise-based query execution
         await new Promise((resolve, reject) => {
             connectionInfo.query(insertChemicalQuery, values, (err) => {
                 if (err) {

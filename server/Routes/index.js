@@ -11,10 +11,14 @@ import {consumables,deleteConsumables} from '../controllers//consumablesRegister
 import createImageUploader from '../middleware/ImageUploader.js'
 import { deleteChemicalImage,deleteGasImage,deleteConsumableImage } from '../Resources/toDelete.js'
 import {deleteProfile} from '../controllers/deleteUser.js'
-const chemicalUploader = createImageUploader('./Resources/chemicalBills');
-const gasUploader = createImageUploader('./Resources/gasBills');
-const consumableUploader = createImageUploader('./Resources/consumables');
+
+
+const chemicalUploader = createImageUploader('Resources/chemicalBills');
+const gasUploader = createImageUploader('Resources/gasBills');
+const consumableUploader = createImageUploader('Resources/consumables');
 import {forgetPassword,confirmation} from '../controllers/ForgotPasswordConfiguration.js'
+
+
 
 export let Route = express.Router()
 
@@ -26,7 +30,7 @@ Route.delete('/deleteProfile',deleteProfile)
 Route.post('/update-Password',forgetPassword)
 Route.post('/password-confirm/:iv/:content',confirmation)
 // chemical and consumables related
-Route.post("/add-chemicals",chemicalUploader.single("chemicalReceipt_file"),addChemicals)
+Route.post("/add-chemicals",chemicalUploader.single("chemicalReceipt"),addChemicals)
 Route.post("/add-consumables",consumableUploader.single("consumable_file"),consumables)
 Route.post("/chem-consu",chemicalsConsumed)
 Route.get('/remain-chemcial',chemcialNotifiyer)

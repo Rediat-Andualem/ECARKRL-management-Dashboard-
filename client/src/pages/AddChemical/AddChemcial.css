@@ -1,5 +1,5 @@
 .formContainerChemical{
-    height: 700px;
+    height: 600px;
 }
 
 
@@ -13,7 +13,7 @@
     color: black;
     background-color:#fe8402;
     height: 2rem;
-    margin: 0.5rem auto;
+    margin: 0.1rem auto;
     font-family: 'Rubik Marker Hatch', cursive;
 }
 
