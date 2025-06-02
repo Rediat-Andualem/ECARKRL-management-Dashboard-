@@ -312,26 +312,26 @@ const handleSubmit = async (e) => {
               <div class="row mb-4">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="chemicalName" class="form-control" placeholder="Chemical name" value={formData.chemicalName} onChange={handleChange} />
+                    <input type="text" required id="chemicalName" class="form-control" placeholder="Chemical name" value={formData.chemicalName} onChange={handleChange} />
                   </div>
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="chemicalFormula" class="form-control" placeholder="Chemical formula" value={formData.chemicalFormula} onChange={handleChange} />
+                    <input type="text" required id="chemicalFormula" class="form-control" placeholder="Chemical formula" value={formData.chemicalFormula} onChange={handleChange} />
                   </div>
                 </div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="number" id="chemicalPurity" class="form-control" placeholder="Chemical purity eg. 98 no % required" value={formData.chemicalPurity} onChange={handleChange} />
+                <input type="number" required id="chemicalPurity" class="form-control" placeholder="Chemical purity eg. 98 no % required" value={formData.chemicalPurity} onChange={handleChange} />
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="chemicalManufacturer" class="form-control" placeholder="Chemical Manufacturer" value={formData.chemicalManufacturer} onChange={handleChange} />
+                <input type="text" required id="chemicalManufacturer" class="form-control" placeholder="Chemical Manufacturer" value={formData.chemicalManufacturer} onChange={handleChange} />
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <select data-mdb-select-init class="select form-select select-custom" id="chemicalState" value={formData.chemicalState} onChange={handleSelectChange}>
+                <select data-mdb-select-init class="select form-select select-custom" required id="chemicalState" value={formData.chemicalState} onChange={handleSelectChange}>
                   <option value="" disabled selected>Choose Chemical State</option>
                   <option value='SOLID'>Solid</option>
                   <option value='LIQUID'>Liquid</option>
@@ -342,12 +342,12 @@ const handleSubmit = async (e) => {
               <div class="row mb-4">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="chemicalAmount" class="form-control" placeholder="Chemical Amount" value={formData.chemicalAmount} onChange={handleChange} />
+                    <input type="text" required id="chemicalAmount" class="form-control" placeholder="Chemical Amount" value={formData.chemicalAmount} onChange={handleChange} />
                   </div>
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <select data-mdb-select-init class="select form-select select-custom" id="unitOfMeasurement" value={formData.unitOfMeasurement} onChange={handleSelectChange}>
+                    <select required data-mdb-select-init class="select form-select select-custom" id="unitOfMeasurement" value={formData.unitOfMeasurement} onChange={handleSelectChange}>
                       <option value="" disabled selected>Unit Of Measurement</option>
                       <option value='ml'>ml</option>
                       <option value='L'>L</option>
@@ -362,7 +362,7 @@ const handleSubmit = async (e) => {
               <div class="row mb-4">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <select data-mdb-select-init class="select form-select select-custom" id="chemicalLocation" value={formData.chemicalLocation} onChange={handleSelectChange}>
+                    <select required data-mdb-select-init class="select form-select select-custom" id="chemicalLocation" value={formData.chemicalLocation} onChange={handleSelectChange}>
                       <option value="" disabled selected>Chemical Location</option>
                       {/* Locations */}
                       <option value='ALCOHOL SECTION'>ALCOHOL SECTION</option>
@@ -397,7 +397,7 @@ const handleSubmit = async (e) => {
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="chemicalOrderedBy" class="form-control" placeholder="Chemical ordered by" value={formData.chemicalOrderedBy} onChange={handleChange} />
+                    <input required type="text" id="chemicalOrderedBy" class="form-control" placeholder="Chemical ordered by" value={formData.chemicalOrderedBy} onChange={handleChange} />
                   </div>
                 </div>
                 <div class="col">
@@ -408,7 +408,7 @@ const handleSubmit = async (e) => {
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <select data-mdb-select-init class="select form-select select-custom" id="chemicalPackaging" value={formData.chemicalPackaging} onChange={handleSelectChange}>
+                <select required data-mdb-select-init class="select form-select select-custom" id="chemicalPackaging" value={formData.chemicalPackaging} onChange={handleSelectChange}>
                   <option value="" disabled selected>Chemical Packaging</option>
                   <option value='GLASS'>Glass</option>
                   <option value='PLASTIC'>Plastic</option>
@@ -417,11 +417,11 @@ const handleSubmit = async (e) => {
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="chemicalExpireDate" class="form-control" placeholder="Chemical Expire Date (MM/YYYY)" value={formData.chemicalExpireDate} onChange={handleChange} />
+                <input required type="text" id="chemicalExpireDate" class="form-control" placeholder="Chemical Expire Date (MM/YYYY)" value={formData.chemicalExpireDate} onChange={handleChange} />
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <select data-mdb-select-init class="select form-select select-custom" id="chemicalPriority" value={formData.chemicalPriority} onChange={handleSelectChange}>
+                <select required data-mdb-select-init class="select form-select select-custom" id="chemicalPriority" value={formData.chemicalPriority} onChange={handleSelectChange}>
                   <option value="" disabled selected>Chemical Priority</option>
                   <option value='High'>High</option>
                   <option value='Low'>Low</option>
@@ -432,7 +432,7 @@ const handleSubmit = async (e) => {
                 <label className="label" htmlFor="fileUpload">
                   Attach receipt (Optional)
                 </label>
-               <input
+               <input required
   id="fileUpload"
   className="in11 mt-4"
   name="chemicalReceipt"
