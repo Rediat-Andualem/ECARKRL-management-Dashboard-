@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS gases (
   gas_ordered_by TEXT NOT NULL,
   gas_cylinders_amount INT NOT NULL,
   gas_bill_path VARCHAR(255) DEFAULT 'not provided',
+  vendor_name VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (gas_id)
@@ -86,18 +87,16 @@ CREATE TABLE IF NOT EXISTS gases_consumed (
   gas_consumption_id INT AUTO_INCREMENT,
   gas_id INT NOT NULL,
   gas_cylinders_consumed INT NOT NULL,
-  user_id INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (gas_consumption_id),
-  FOREIGN KEY (gas_id) REFERENCES gases(gas_id),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  FOREIGN KEY (gas_id) REFERENCES gases(gas_id)
 )`;
+
 
 export let consumables = `
 CREATE TABLE IF NOT EXISTS consumables (
   consumables_id INT AUTO_INCREMENT,
-  user_id INT NOT NULL,
   consumable_name TEXT NOT NULL,
   consumable_location ENUM(
     'Consumable Location One [C-L-1]', 'Consumable Location Two [C-L-2]', 
@@ -107,9 +106,8 @@ CREATE TABLE IF NOT EXISTS consumables (
     'Consumable Location Nine [C-L-9]', 'Consumable Location Ten [C-L-10]'
   ) NOT NULL,
   picture_location VARCHAR(255),
+  consumables_vender_name VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  consumables_vender_name VARCHAR(255) NOT NULL,
-  PRIMARY KEY (consumables_id),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  PRIMARY KEY (consumables_id)
 )`;

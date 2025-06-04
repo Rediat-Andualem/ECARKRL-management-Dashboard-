@@ -5,9 +5,9 @@ import {login} from '../controllers/LoginControler.js'
 import {addChemicals}  from '../controllers/addChemical.js'
 import {addGas} from '../controllers/addGas.js'
 import {chemicalsConsumed}  from '../controllers/chemicalConsumed.js'
-import {gasConsumed} from '../controllers/gasesConsumed.js'
+import {gasConsumed,getAllGasesCylinder} from '../controllers/gasesConsumed.js'
 import {chemcialNotifiyer,gasNotifiyer,zeroGasDelete} from '../middleware/chemialAndGasNotification.js'
-import {consumables,deleteConsumables} from '../controllers//consumablesRegisteration.js'
+import {consumables,deleteConsumables} from '../controllers/consumablesRegisteration.js'
 import createImageUploader from '../middleware/ImageUploader.js'
 import { deleteChemicalImage,deleteGasImage,deleteConsumableImage } from '../Resources/toDelete.js'
 import {deleteProfile} from '../controllers/deleteUser.js'
@@ -31,13 +31,17 @@ Route.post('/update-Password',forgetPassword)
 Route.post('/password-confirm/:iv/:content',confirmation)
 // chemical and consumables related
 Route.post("/add-chemicals",chemicalUploader.single("chemicalReceipt"),addChemicals)
-Route.post("/add-consumables",consumableUploader.single("consumable_file"),consumables)
+Route.post("/add-consumables",consumableUploader.single("consumableReceipt"),consumables)
 Route.post("/chem-consu",chemicalsConsumed)
 Route.get('/remain-chemcial',chemcialNotifiyer)
 Route.get('/delete-chemical/:chemical_id',deleteChemicalImage)
 // gas related
-Route.post("/add-gas",gasUploader.single("gassesReceipt_file"),addGas)
-Route.post("/gas-consu",gasConsumed)
+Route.post("/add-gas",gasUploader.single("gassesReceipt"),addGas)
+Route.post("/gas-consumed",gasConsumed)
+Route.get('/getAllGases',getAllGasesCylinder)
+
+
+
 Route.get('/remain-gas',gasNotifiyer)
 Route.get('/delete-gas',zeroGasDelete)
 Route.get('/delete-gas/:gas_id',deleteGasImage)

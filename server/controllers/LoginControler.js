@@ -47,7 +47,7 @@ export let login = (req, res) => {
                         });
                        
                     } else {
-                        console.log(userData)
+                    
                         const accessToken = jwt.sign({ id: userData.user_id, display_name: userData.user_first_name,user_role:userData.user_role,user_email:userData.user_email }, process.env.JWT_SECRET, { expiresIn: "30d" }); 
 
                         

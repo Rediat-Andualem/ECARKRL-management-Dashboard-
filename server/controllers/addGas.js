@@ -3,7 +3,7 @@ import connectionInfo from "../schema/db.config.js";
 connectionInfo
 
 export let addGas = (req, res) => {
-    const { gas_name, gas_cylinders_amount } = req.body;
+    const { gas_name, gas_cylinders_amount,ordered_by,vendor_name } = req.body;
     let gas_bill_path = req.file ? req.file.path : 'not provided'; 
     const isStringRegex = /^[A-Za-z\s]+$/;
     const isNumberRegex = /^\d+$/;
@@ -13,6 +13,7 @@ export let addGas = (req, res) => {
         });
     } else {
         if (!isStringRegex.test(gas_name)) {
+            console.log(gas_name)
             res.json({
                 message: "Gas name should only contain alphabets"
             });
@@ -22,8 +23,8 @@ export let addGas = (req, res) => {
                     message: "gas cylinder amount should only contain numbers"
                 });
             } else {
-                let insertGasQuery = `INSERT INTO gases(gas_name,gas_cylinders_amount,gas_bill_path) VALUES (?, ?, ?)`;
-                let values = [gas_name, gas_cylinders_amount, gas_bill_path];
+                let insertGasQuery = `INSERT INTO gases(gas_name,gas_cylinders_amount,gas_ordered_by,gas_bill_path,vendor_name) VALUES (?, ?, ?,?,?)`;
+                let values = [gas_name, gas_cylinders_amount,ordered_by, gas_bill_path,vendor_name];
 
                 connectionInfo.query(insertGasQuery, values, (err) => {
                     if (err) {
