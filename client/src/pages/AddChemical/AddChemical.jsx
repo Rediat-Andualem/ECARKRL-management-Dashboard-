@@ -1,232 +1,11 @@
-// import React from "react";
-// import "./AddChemcial.css";
-// import image from "../../image/chemicals2.jpg";
-// import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
-// import { Input, Ripple, initMDB } from "mdb-ui-kit";
-
-// initMDB({ Input, Ripple });
-// function AddChemical() {
-
-
-// let handleSubmit = () =>{
-
-// }
-
-
-//   return (
-// <>
-// <MDBContainer fluid className="p-3 my-5 h-custom">
-
-// <MDBRow className='mx-3'>
-
-//   <MDBCol col='10' md='6'>
-//     <img src={image} class="img-fluid retouch " alt="Sample image" />
-//   </MDBCol>
-
-//   <MDBCol col='3' md='5' className='mx-3'>
-
-//     <div className="d-flex flex-row align-items-center justify-content-center">
-
-//       <h3 className="stylingText text-white">ADD CHEMICALS </h3>
-
-
-//     </div>
-
-//     <div className="divider  my-4">
-
-//     </div>
-// <form className="formContainerChemical" onSubmit={handleSubmit}>
-
-// <div class="row mb-4">
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-//   <input type="text" id="form3Example1" class="form-control" placeholder="Chemical name" />
-//   {/* <label class="form-label" for="form3Example1">Chemical Name</label> */}
-// </div>
-// </div>
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-//   <input type="text" id="form3Example2" class="form-control" placeholder="Chemical formula"/>
-//   {/* <label class="form-label" for="form3Example2">Chemical Formula</label> */}
-// </div>
-// </div>
-// </div>
-
-// <div data-mdb-input-init class="form-outline mb-4">
-// <input type="email" id="form3Example3" class="form-control" placeholder="Chemical purity eg. 98 no % required" />
-// {/* <label class="form-label" for="form3Example3">Chemical Purity</label> */}
-// </div>
-
-
-// <div data-mdb-input-init class="form-outline mb-4">
-// <input type="text" id="form3Example4" class="form-control" placeholder="Chemical Manufacturer"/>
-// {/* <label class="form-label" for="form3Example4">Chemical Manufacturer</label> */}
-
-// </div>
-// <div data-mdb-input-init class="form-outline mb-4">
-
-//     <select data-mdb-select-init class="select form-select select-custom" id="state" >
-//       <option value="" disabled selected>Choose Chemical State</option>
-//       <option value='SOLID'>Solid</option>
-//       <option value='LIQUID'>Liquid</option>
-//       <option value='GAS'>Gas</option>
-//     </select>
-
-// </div>
-// <div class="row mb-4">
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-//   <input type="" id="form3Example7" class="form-control"  placeholder="Chemical Amount"/>
-//   {/* <label class="form-label" for="form3Example7">Chemical Amount</label> */}
-// </div>
-// </div>
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-//   {/* <input type="text" id="form3Example8" class="form-control" placeholder="Chemical Expire Date (MM/YYYY)"/> */}
-//   {/* <label class="form-label" for="form3Example8">Chemical Expire Date</label> */}
-//   <div data-mdb-input-init class="form-outline mb-4">
-// <select data-mdb-select-init class="select form-select select-custom" id="state" >
-//       <option value="" disabled selected>Unit Of Measurement </option>
-//       <option value='ml'>ml</option>
-//       <option value='L'>L</option>
-//       <option value='mg'>mg</option>
-//       <option value='g'>g</option>
-//       <option value='Kg'>Kg</option>
-//     </select>
-
-// </div>
-
-// </div>
-
-// </div>
-
-
-
-
-// </div>
-// <div class="row mb-4">
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-// <select data-mdb-select-init class="select form-select select-custom" id="state" >
-//       <option value="" disabled selected>Chemical Location</option>
-//       <option value='ALCOHOL SECTION'>ALCOHOL SECTION</option>
-//       <option value='SOLID-A-B'>SOLID-A-B</option>
-//       <option value='SOLID-C-D'>SOLID-C-D</option>
-//       <option value='SOLID-E-F'>SOLID-E-F</option>
-//       <option value='SOLID-G-H'>SOLID-G-H</option>
-//       <option value='SOLID-I-J'>SOLID-I-J</option>
-//       <option value='SOLID-K-L'>SOLID-K-L</option>
-//       <option value='SOLID-M-N'>SOLID-M-N</option>
-//       <option value='SOLID-O-P'>SOLID-O-P</option>
-//       <option value='SOLID-Q-R'>SOLID-Q-R</option>
-//       <option value='SOLID-S-T'>SOLID-S-T</option>
-//       <option value='SOLID-U-V'>SOLID-U-V</option>
-//       <option value='SOLID-W-X'>SOLID-W-X</option>
-//       <option value='SOLID-Y-Z'>SOLID-Y-Z</option>
-//       <option value='LIQUID-A-B'>LIQUID-A-B</option>
-//       <option value='LIQUID-C-D'>LIQUID-C-D</option>
-//       <option value='LIQUID-E-F'>LIQUID-E-F</option>
-//       <option value='LIQUID-G-H'>LIQUID-G-H</option>
-//       <option value='LIQUID-I-J'>LIQUID-I-J</option>
-//       <option value='LIQUID-K-L'>LIQUID-K-L</option>
-//       <option value='LIQUID-M-N'>LIQUID-M-N</option>
-//       <option value='LIQUID-O-P'>LIQUID-O-P</option>
-//       <option value='LIQUID-Q-R'>LIQUID-Q-R</option>
-//       <option value='LIQUID-S-T'>LIQUID-S-T</option>
-//       <option value='LIQUID-U-V'>LIQUID-U-V</option>
-//       <option value='LIQUID-W-X'>LIQUID-W-X</option>
-//       <option value='LIQUID-Y-Z'>LIQUID-Y-Z</option>
-//     </select>
-// </div>
-// </div>
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-//   <input type="text" id="form3Example10" class="form-control" placeholder="Chemical ordered by"/>
-//   {/* <label class="form-label" for="form3Example10">Chemical Ordered By</label> */}
-// </div>
-// </div>
-// <div class="col">
-// <div data-mdb-input-init class="form-outline">
-//   <input type="text" id="form3Example10" class="form-control" placeholder="Vendor name" />
-//   {/* <label class="form-label" for="form3Example10">Vendor Name</label> */}
-// </div>
-// </div>
-// </div>
-// <div data-mdb-input-init class="form-outline mb-4">
-
-//     <select data-mdb-select-init class="select form-select select-custom" id="state" >
-//       <option value="" disabled selected>Chemical Packaging</option>
-//       <option value='GLASS'>Glass</option>
-//       <option value='PLASTIC'>Plastic</option>
-//       <option value='OTHER CONTAINER'>Other Container</option>
-//     </select>
-// </div>
-// <div data-mdb-input-init class="form-outline mb-4">
-// {/* <select data-mdb-select-init class="select form-select select-custom" id="state" >
-//       <option value="" disabled selected>Unit Of Measurement </option>
-//       <option value='ml'>ml</option>
-//       <option value='L'>L</option>
-//       <option value='mg'>mg</option>
-//       <option value='g'>g</option>
-//       <option value='Kg'>Kg</option>
-//     </select> */}
-//       <input type="text" id="form3Example8" class="form-control" placeholder="Chemical Expire Date (MM/YYYY)"/>
-
-// </div>
-// <div data-mdb-input-init class="form-outline mb-4">
-// <select data-mdb-select-init class="select form-select select-custom" id="state" >
-//       <option value="" disabled selected>Chemical Priority </option>
-//       <option value='High'>High</option>
-//       <option value='Low'>Low</option>
-//     </select>
-// </div>
-
-// <div data-mdb-input-init class="form-outline mb-4">
-// <label className="label" htmlFor="fileUpload">
-//             Attach receipt (Optional)
-//             </label>
-//           <input
-//             id="fileUpload"
-//             required
-//             className="in11 mt-4"
-//             name="Course_file"
-//             autoComplete="new-password"
-//             type="file"
-//             accept="application/pdf"
-//           />
-// </div>
-
-
-// <div className="">
-
-// <button  type="button" class="btn btn-primary btn-block mb-4" >Add Chemical</button>
-
-// </div>
-
-// </form>
-
-//   </MDBCol>
-
-// </MDBRow>
-
-
-// </MDBContainer>
-// </>
-     
-
-//   );
-// }
-
-// export default AddChemical;
 import React, { useState } from "react";
 import "./AddChemcial.css";
 import image from "../../image/chemicals2.jpg";
-import { MDBContainer, MDBCol, MDBRow } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBCol, MDBRow } from "mdb-react-ui-kit";
 import { Input, Ripple, initMDB } from "mdb-ui-kit";
-import {axiosInstance} from '../../Utility/urlInstance'
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { axiosInstance } from "../../Utility/urlInstance";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 initMDB({ Input, Ripple });
 
@@ -262,98 +41,157 @@ function AddChemical() {
     setFormData({ ...formData, [id]: value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-  
-    const data = new FormData();
+    try {
+      const data = new FormData();
 
-    for (const key in formData) {
-      if (key !== "receipt") {
-        data.append(key, formData[key]);
+      for (const key in formData) {
+        if (key !== "receipt") {
+          data.append(key, formData[key]);
+        }
       }
+      // Append the file if exists
+      if (formData.receipt) {
+        data.append("chemicalReceipt", formData.receipt);
+      }
+
+      const addedData = await axiosInstance.post("/add-chemicals", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Chemical added successfully:", addedData.data);
+      toast.success("Chemical added successfully!");
+    } catch (error) {
+      console.error("Error adding chemical:", error);
+      toast.error("Error adding chemical. Please try again!");
     }
-    // Append the file if exists
-    if (formData.receipt) {
-      data.append("chemicalReceipt", formData.receipt); 
-    }
-
-    const addedData = await axiosInstance.post('/add-chemicals', data, {
-      headers: {
-        "Content-Type": "multipart/form-data", 
-      },
-    });
-    
-    console.log('Chemical added successfully:', addedData.data);
-    toast.success('Chemical added successfully!');
-  } catch (error) {
-    console.error('Error adding chemical:', error);
-    toast.error('Error adding chemical. Please try again!');
-  }
-};
-
-
-
+  };
 
   return (
     <>
       <MDBContainer fluid className="p-3 my-5 h-custom">
-        <MDBRow className='mx-3'>
-          <MDBCol col='10' md='6'>
+        <MDBRow className="mx-3">
+          <MDBCol col="10" md="6">
             <img src={image} class="img-fluid retouch " alt="Sample image" />
           </MDBCol>
-          <MDBCol col='3' md='5' className='mx-3'>
+          <MDBCol col="3" md="5" className="mx-3">
             <div className="d-flex flex-row align-items-center justify-content-center">
               <h3 className="stylingText text-white">ADD CHEMICALS </h3>
             </div>
             <div className="divider  my-4"></div>
-            <form className="formContainerChemical" method="POST" onSubmit={handleSubmit} enctype="multipart/form-data">
+            <form
+              className="formContainerChemical"
+              method="POST"
+              onSubmit={handleSubmit}
+              enctype="multipart/form-data"
+            >
               <div class="row mb-4">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" required id="chemicalName" class="form-control" placeholder="Chemical name" value={formData.chemicalName} onChange={handleChange} />
+                    <input
+                      type="text"
+                      required
+                      id="chemicalName"
+                      class="form-control"
+                      placeholder="Chemical name"
+                      value={formData.chemicalName}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" required id="chemicalFormula" class="form-control" placeholder="Chemical formula" value={formData.chemicalFormula} onChange={handleChange} />
+                    <input
+                      type="text"
+                      required
+                      id="chemicalFormula"
+                      class="form-control"
+                      placeholder="Chemical formula"
+                      value={formData.chemicalFormula}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="number" required id="chemicalPurity" class="form-control" placeholder="Chemical purity eg. 98 no % required" value={formData.chemicalPurity} onChange={handleChange} />
+                <input
+                  type="number"
+                  required
+                  id="chemicalPurity"
+                  class="form-control"
+                  placeholder="Chemical purity eg. 98 no % required"
+                  value={formData.chemicalPurity}
+                  onChange={handleChange}
+                />
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" required id="chemicalManufacturer" class="form-control" placeholder="Chemical Manufacturer" value={formData.chemicalManufacturer} onChange={handleChange} />
+                <input
+                  type="text"
+                  required
+                  id="chemicalManufacturer"
+                  class="form-control"
+                  placeholder="Chemical Manufacturer"
+                  value={formData.chemicalManufacturer}
+                  onChange={handleChange}
+                />
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <select data-mdb-select-init class="select form-select select-custom" required id="chemicalState" value={formData.chemicalState} onChange={handleSelectChange}>
-                  <option value="" disabled selected>Choose Chemical State</option>
-                  <option value='SOLID'>Solid</option>
-                  <option value='LIQUID'>Liquid</option>
-                  <option value='GAS'>Gas</option>
+                <select
+                  data-mdb-select-init
+                  class="select form-select select-custom"
+                  required
+                  id="chemicalState"
+                  value={formData.chemicalState}
+                  onChange={handleSelectChange}
+                >
+                  <option value="" disabled selected>
+                    Choose Chemical State
+                  </option>
+                  <option value="SOLID">Solid</option>
+                  <option value="LIQUID">Liquid</option>
+                  <option value="GAS">Gas</option>
                 </select>
               </div>
 
               <div class="row mb-4">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" required id="chemicalAmount" class="form-control" placeholder="Chemical Amount" value={formData.chemicalAmount} onChange={handleChange} />
+                    <input
+                      type="text"
+                      required
+                      id="chemicalAmount"
+                      class="form-control"
+                      placeholder="Chemical Amount"
+                      value={formData.chemicalAmount}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <select required data-mdb-select-init class="select form-select select-custom" id="unitOfMeasurement" value={formData.unitOfMeasurement} onChange={handleSelectChange}>
-                      <option value="" disabled selected>Unit Of Measurement</option>
-                      <option value='ml'>ml</option>
-                      <option value='L'>L</option>
-                      <option value='mg'>mg</option>
-                      <option value='g'>g</option>
-                      <option value='Kg'>Kg</option>
+                    <select
+                      required
+                      data-mdb-select-init
+                      class="select form-select select-custom"
+                      id="unitOfMeasurement"
+                      value={formData.unitOfMeasurement}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="" disabled selected>
+                        Unit Of Measurement
+                      </option>
+                      <option value="ml">ml</option>
+                      <option value="L">L</option>
+                      <option value="mg">mg</option>
+                      <option value="g">g</option>
+                      <option value="Kg">Kg</option>
                     </select>
                   </div>
                 </div>
@@ -362,69 +200,119 @@ const handleSubmit = async (e) => {
               <div class="row mb-4">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <select required data-mdb-select-init class="select form-select select-custom" id="chemicalLocation" value={formData.chemicalLocation} onChange={handleSelectChange}>
-                      <option value="" disabled selected>Chemical Location</option>
+                    <select
+                      required
+                      data-mdb-select-init
+                      class="select form-select select-custom"
+                      id="chemicalLocation"
+                      value={formData.chemicalLocation}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="" disabled selected>
+                        Chemical Location
+                      </option>
                       {/* Locations */}
-                      <option value='ALCOHOL SECTION'>ALCOHOL SECTION</option>
-                      <option value='SOLID-A-B'>SOLID-A-B</option>
-                      <option value='SOLID-C-D'>SOLID-C-D</option>
-                      <option value='SOLID-E-F'>SOLID-E-F</option>
-                      <option value='SOLID-G-H'>SOLID-G-H</option>
-                      <option value='SOLID-I-J'>SOLID-I-J</option>
-                      <option value='SOLID-K-L'>SOLID-K-L</option>
-                      <option value='SOLID-M-N'>SOLID-M-N</option>
-                      <option value='SOLID-O-P'>SOLID-O-P</option>
-                      <option value='SOLID-Q-R'>SOLID-Q-R</option>
-                      <option value='SOLID-S-T'>SOLID-S-T</option>
-                      <option value='SOLID-U-V'>SOLID-U-V</option>
-                      <option value='SOLID-W-X'>SOLID-W-X</option>
-                      <option value='SOLID-Y-Z'>SOLID-Y-Z</option>
-                      <option value='LIQUID-A-B'>LIQUID-A-B</option>
-                      <option value='LIQUID-C-D'>LIQUID-C-D</option>
-                      <option value='LIQUID-E-F'>LIQUID-E-F</option>
-                      <option value='LIQUID-G-H'>LIQUID-G-H</option>
-                      <option value='LIQUID-I-J'>LIQUID-I-J</option>
-                      <option value='LIQUID-K-L'>LIQUID-K-L</option>
-                      <option value='LIQUID-M-N'>LIQUID-M-N</option>
-                      <option value='LIQUID-O-P'>LIQUID-O-P</option>
-                      <option value='LIQUID-Q-R'>LIQUID-Q-R</option>
-                      <option value='LIQUID-S-T'>LIQUID-S-T</option>
-                      <option value='LIQUID-U-V'>LIQUID-U-V</option>
-                      <option value='LIQUID-W-X'>LIQUID-W-X</option>
-                      <option value='LIQUID-Y-Z'>LIQUID-Y-Z</option>
+                      <option value="ALCOHOL SECTION">ALCOHOL SECTION</option>
+                      <option value="SOLID-A-B">SOLID-A-B</option>
+                      <option value="SOLID-C-D">SOLID-C-D</option>
+                      <option value="SOLID-E-F">SOLID-E-F</option>
+                      <option value="SOLID-G-H">SOLID-G-H</option>
+                      <option value="SOLID-I-J">SOLID-I-J</option>
+                      <option value="SOLID-K-L">SOLID-K-L</option>
+                      <option value="SOLID-M-N">SOLID-M-N</option>
+                      <option value="SOLID-O-P">SOLID-O-P</option>
+                      <option value="SOLID-Q-R">SOLID-Q-R</option>
+                      <option value="SOLID-S-T">SOLID-S-T</option>
+                      <option value="SOLID-U-V">SOLID-U-V</option>
+                      <option value="SOLID-W-X">SOLID-W-X</option>
+                      <option value="SOLID-Y-Z">SOLID-Y-Z</option>
+                      <option value="LIQUID-A-B">LIQUID-A-B</option>
+                      <option value="LIQUID-C-D">LIQUID-C-D</option>
+                      <option value="LIQUID-E-F">LIQUID-E-F</option>
+                      <option value="LIQUID-G-H">LIQUID-G-H</option>
+                      <option value="LIQUID-I-J">LIQUID-I-J</option>
+                      <option value="LIQUID-K-L">LIQUID-K-L</option>
+                      <option value="LIQUID-M-N">LIQUID-M-N</option>
+                      <option value="LIQUID-O-P">LIQUID-O-P</option>
+                      <option value="LIQUID-Q-R">LIQUID-Q-R</option>
+                      <option value="LIQUID-S-T">LIQUID-S-T</option>
+                      <option value="LIQUID-U-V">LIQUID-U-V</option>
+                      <option value="LIQUID-W-X">LIQUID-W-X</option>
+                      <option value="LIQUID-Y-Z">LIQUID-Y-Z</option>
                     </select>
                   </div>
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input required type="text" id="chemicalOrderedBy" class="form-control" placeholder="Chemical ordered by" value={formData.chemicalOrderedBy} onChange={handleChange} />
+                    <input
+                      required
+                      type="text"
+                      id="chemicalOrderedBy"
+                      class="form-control"
+                      placeholder="Chemical ordered by"
+                      value={formData.chemicalOrderedBy}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="vendorName" class="form-control" placeholder="Vendor name" value={formData.vendorName} onChange={handleChange} />
+                    <input
+                      type="text"
+                      id="vendorName"
+                      class="form-control"
+                      placeholder="Vendor name"
+                      value={formData.vendorName}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <select required data-mdb-select-init class="select form-select select-custom" id="chemicalPackaging" value={formData.chemicalPackaging} onChange={handleSelectChange}>
-                  <option value="" disabled selected>Chemical Packaging</option>
-                  <option value='GLASS'>Glass</option>
-                  <option value='PLASTIC'>Plastic</option>
-                  <option value='OTHER CONTAINER'>Other Container</option>
+                <select
+                  required
+                  data-mdb-select-init
+                  class="select form-select select-custom"
+                  id="chemicalPackaging"
+                  value={formData.chemicalPackaging}
+                  onChange={handleSelectChange}
+                >
+                  <option value="" disabled selected>
+                    Chemical Packaging
+                  </option>
+                  <option value="GLASS">Glass</option>
+                  <option value="PLASTIC">Plastic</option>
+                  <option value="OTHER CONTAINER">Other Container</option>
                 </select>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <input required type="text" id="chemicalExpireDate" class="form-control" placeholder="Chemical Expire Date (MM/YYYY)" value={formData.chemicalExpireDate} onChange={handleChange} />
+                <input
+                  required
+                  type="text"
+                  id="chemicalExpireDate"
+                  class="form-control"
+                  placeholder="Chemical Expire Date (MM/YYYY)"
+                  value={formData.chemicalExpireDate}
+                  onChange={handleChange}
+                />
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
-                <select required data-mdb-select-init class="select form-select select-custom" id="chemicalPriority" value={formData.chemicalPriority} onChange={handleSelectChange}>
-                  <option value="" disabled selected>Chemical Priority</option>
-                  <option value='High'>High</option>
-                  <option value='Low'>Low</option>
+                <select
+                  required
+                  data-mdb-select-init
+                  class="select form-select select-custom"
+                  id="chemicalPriority"
+                  value={formData.chemicalPriority}
+                  onChange={handleSelectChange}
+                >
+                  <option value="" disabled selected>
+                    Chemical Priority
+                  </option>
+                  <option value="High">High</option>
+                  <option value="Low">Low</option>
                 </select>
               </div>
 
@@ -432,23 +320,27 @@ const handleSubmit = async (e) => {
                 <label className="label" htmlFor="fileUpload">
                   Attach receipt (Optional)
                 </label>
-               <input required
-  id="fileUpload"
-  className="in11 mt-4"
-  name="chemicalReceipt"
-  autoComplete="new-password"
-  type="file"
-  accept="image/jpeg, image/png, image/gif, application/pdf"
-  onChange={handleChange}
-/>
-
+                <input
+                  id="fileUpload"
+                  className="in11 mt-4"
+                  name="chemicalReceipt"
+                  autoComplete="new-password"
+                  type="file"
+                  accept="image/jpeg, image/png, image/gif, application/pdf"
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="">
-                <button type="submit" class="btn btn-primary btn-block mb-4">Add Chemical</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                  Add Chemical
+                </button>
               </div>
             </form>
-            <ToastContainer position="top-center" style={{ right: 0, left: "auto" }} />
+            <ToastContainer
+              position="top-center"
+              style={{ right: 0, left: "auto" }}
+            />
           </MDBCol>
         </MDBRow>
       </MDBContainer>
@@ -457,4 +349,3 @@ const handleSubmit = async (e) => {
 }
 
 export default AddChemical;
-

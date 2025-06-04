@@ -55,16 +55,12 @@ function LandingPage() {
               Add Gas
             </button>
             <br />
-            <button className={styles.buttonStyle} onClick={() => renderComponent("ConsumeChemicals")}>
-              Consume Chemical
-            </button>
-            <br />
             <button className={styles.buttonStyle} onClick={() => renderComponent("RegisterConsumables")}>
               Consumables Registration
             </button>
             <br />
             <button className={styles.buttonStyle} onClick={() => renderComponent("AddGasConsumed")}>
-              Add Gas Consumed
+             Gas cylinder consumed
             </button>
           </div>
         </div>
