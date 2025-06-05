@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AddChemcial.css";
-import image from "../../image/chemicals2.jpg";
+import image from "../../image/chemcials2.webp";
 import { MDBContainer, MDBCol, MDBRow } from "mdb-react-ui-kit";
 import { Input, Ripple, initMDB } from "mdb-ui-kit";
 import { axiosInstance } from "../../Utility/urlInstance";
@@ -75,8 +75,8 @@ function AddChemical() {
     <>
       <MDBContainer fluid className="p-3 my-5 h-custom">
         <MDBRow className="mx-3">
-          <MDBCol col="10" md="6">
-            <img src={image} class="img-fluid retouch " alt="Sample image" />
+          <MDBCol col="10" md="6" >
+            <img src={image} class="img-fluid retouch d-none d-md-block" alt="Sample image" />
           </MDBCol>
           <MDBCol col="3" md="5" className="mx-3">
             <div className="d-flex flex-row align-items-center justify-content-center">
@@ -118,6 +118,19 @@ function AddChemical() {
                 </div>
               </div>
 
+
+
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input
+                  type="text"
+                  required
+                  id="casNumber"
+                  class="form-control"
+                  placeholder="CAS Number eg. 86722-66-9"
+                  value={formData.casNumber}
+                  onChange={handleChange}
+                />
+              </div>
               <div data-mdb-input-init class="form-outline mb-4">
                 <input
                   type="number"

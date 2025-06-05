@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AddGas.css";
-import image from "../../image/gas-cylinders-stack.webp";
+import image from "../../image/cylinders_new.webp";
 import { MDBContainer, MDBCol, MDBRow } from "mdb-react-ui-kit";
 import { axiosInstance } from "../../Utility/urlInstance"; // make sure this is configured
 import { ToastContainer, toast } from 'react-toastify';
@@ -64,7 +64,7 @@ const handleSubmit = async (e) => {
         <MDBCol col="10" md="6">
           <img
             src={image}
-            className="px-4 align-items-center"
+            className="px-4 imageBorder align-items-center d-none d-md-block"
             alt="Sample"
           />
         </MDBCol>

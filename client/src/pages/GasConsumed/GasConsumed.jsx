@@ -58,7 +58,7 @@ function GasConsumed() {
         <MDBContainer fluid className="p-3 my-5 h-custom">
           <MDBRow className="mx-3">
             <MDBCol col="10" md="6">
-              <img src={image} className="img-fluid retouch" alt="Sample" />
+              <img src={image} className="img-fluid retouch d-none d-md-block" alt="Sample" />
             </MDBCol>
             <MDBCol col="3" md="5" className="mx-3">
               <div className="d-flex flex-row align-items-center justify-content-center">

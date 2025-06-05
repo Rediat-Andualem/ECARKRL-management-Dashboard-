@@ -8,7 +8,9 @@ import AddGases from "../AddGas/AddGas";
 import ConsumeChemicals from "../AddConsumables/AddConsumables";
 import RegisterConsumables from "../AddConsumables/AddConsumables"
 import AddGasConsumed from "../GasConsumed/GasConsumed"
-
+import ListChemicals from "../ListChemicals/ListChemicals"
+import ListConsumables from "../ListConsumables/ListConsumables"
+import ListGases from "../ListGases/ListGases"
 
 function LandingPage() {
   const userData = useAuthUser();
@@ -31,6 +33,15 @@ function LandingPage() {
         break;
       case "AddGasConsumed":
         setSelectedComponent(<AddGasConsumed />);
+        break;
+      case "listChemicals":
+        setSelectedComponent(< ListChemicals />);
+        break;
+      case "listConsumables":
+        setSelectedComponent(< ListConsumables/>);
+        break;
+      case "listGases":
+        setSelectedComponent(<ListGases />);
         break;
       default:
         setSelectedComponent(null);
@@ -62,6 +73,19 @@ function LandingPage() {
             <button className={styles.buttonStyle} onClick={() => renderComponent("AddGasConsumed")}>
              Gas cylinder consumed
             </button>
+             <hr className={`text-white`} />
+              <button className={styles.buttonStyle} onClick={() => renderComponent("listChemicals")}>
+              Search Chemicals
+            </button>
+            <br />
+            <button className={styles.buttonStyle} onClick={() => renderComponent("listConsumables")}>
+              Search Consumables
+            </button>
+            <br />
+            <button className={styles.buttonStyle} onClick={() => renderComponent("listGases")}>
+              Search Gases
+            </button>
+            <br />
           </div>
         </div>
       </div>

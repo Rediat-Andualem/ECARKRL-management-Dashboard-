@@ -19,7 +19,10 @@
     background-color:#007bff;
 }
 
+.imageBorder{
 
+    border-radius: 45px;
+}
     .forUploadingFile{
         display: none !important;
     }
