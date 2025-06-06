@@ -9,6 +9,7 @@ import LayOut from "./components/LayOut/LayOut.jsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx"
 import EmailForPassword from "./pages/EmailForPassword/EmailForPassword.jsx";
 import PasswordUpdater from "./pages/PassWordUpdator/PassWordUpdator.jsx"
+import ChemicalDetailsPage from "./pages/DetailsPage/ChemcialDeatils.jsx"
 const RoutesConfig = () => {
   return (
     <Routes>
@@ -17,11 +18,14 @@ const RoutesConfig = () => {
       <Route path="/" element={<LogIn />} />
       {/* email password updator */}
       <Route path="/passwordConfirm/:iv/:content" element={<LayOut><PasswordUpdater /></LayOut>} />
+      <Route path="/chemicalDetails/:chemicalId" element={<LayOut><ChemicalDetailsPage /></LayOut>} />
       <Route path="/emailForPassword" element={<LayOut><EmailForPassword /></LayOut>} />
       {/* ----------------- */}
       <Route element={<PrivateRoute />}>
       <Route path="/dashboard" element={<LayOut> <LandingPage /> </LayOut>} />
       </Route>
+
+
 
       <Route path="/*" element={<PageNotFound />} />
     </Routes>

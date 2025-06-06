@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { PiSmileySadThin } from "react-icons/pi";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import {useNavigate} from 'react-router-dom'
 dayjs.extend(customParseFormat);
 function ListChemicals() {
 const [chemicalList, setChemicalList]= useState([])
@@ -14,6 +15,8 @@ const [loading, setLoading]= useState(false)
 useEffect(()=>{
  getASllChemical()
 },[])
+
+const navigate = useNavigate()
 
 let getASllChemical = async ()=>{
   try {
@@ -30,7 +33,12 @@ let getASllChemical = async ()=>{
          setChemicalList(false)
      }
 }
- const paginationModel = { page: 0, pageSize: 3 };
+
+const paginationModel = { page: 0, pageSize: 3 };
+const detailPage = (chemicalId)=>{
+       navigate(`/chemicalDetails/${chemicalId}`)
+}
+
   return (
     <>
     <h4 className='text-white m-3'>List Of Chemicals</h4>
@@ -41,7 +49,7 @@ let getASllChemical = async ()=>{
           </h4>
         ) : (
       
-          <Paper sx={{ height: "90%", width: "100%", margin: "2%" }}>
+          <Paper sx={{ height: "90%", width: "95%", margin: "auto" }}>
             <DataGrid
               rows={chemicalList?.map((singleChemical, i) => {        
                 return {
@@ -54,13 +62,13 @@ let getASllChemical = async ()=>{
                   chemical_ordered_by: singleChemical.chemical_ordered_by,
                   chemical_vender_name: singleChemical.chemical_vender_name,
                   chemical_purity: singleChemical.chemical_purity,
-                  chemical_state: singleChemical.chemical_state,
-                  chemical_packaging: singleChemical.chemical_packaging,
-                  chemical_amount: `${singleChemical.chemical_amount} ${singleChemical.chemical_unit_of_measurement}`,
+                  // chemical_state: singleChemical.chemical_state,
+                  // chemical_packaging: singleChemical.chemical_packaging,
+                  // chemical_amount: `${singleChemical.chemical_amount} ${singleChemical.chemical_unit_of_measurement}`,
                   chemical_expire_date: singleChemical.chemical_expire_date,
-                  chemical_delivered_date: dayjs(singleChemical.createdAt).format(
-                  "DD/MM/YYYY"
-                ),
+                //   chemical_delivered_date: dayjs(singleChemical.createdAt).format(
+                //   "DD/MM/YYYY"
+                // ),
                   chemical_id: singleChemical.chemical_id
                 };
               })}
@@ -105,31 +113,31 @@ let getASllChemical = async ()=>{
                   headerName: "Purity",
                   width: 100,
                 },
-                {
-                  field: "chemical_state",
-                  headerName: "State",
-                  width: 100,
-                },
-                {
-                  field: "chemical_packaging",
-                  headerName: "State",
-                  width: 100,
-                },
-                {
-                  field: "chemical_amount",
-                  headerName: "State",
-                  width: 100,
-                },
+                // {
+                //   field: "chemical_state",
+                //   headerName: "State",
+                //   width: 100,
+                // },
+                // {
+                //   field: "chemical_packaging",
+                //   headerName: "State",
+                //   width: 100,
+                // },
+                // {
+                //   field: "chemical_amount",
+                //   headerName: "State",
+                //   width: 100,
+                // },
                 {
                   field: "chemical_expire_date",
                   headerName: "Expire Date",
                   width: 100,
                 },
-                {
-                  field: "chemical_delivered_date",
-                  headerName: "Delivery Date",
-                  width: 100,
-                },
+                // {
+                //   field: "chemical_delivered_date",
+                //   headerName: "Delivery Date",
+                //   width: 100,
+                // },
                 {
                   field: "action",
                   headerName: "Action",
@@ -137,10 +145,10 @@ let getASllChemical = async ()=>{
                   renderCell: (params) => (
                     <Button
                       style={{ margin: "5px" }}
-                      onClick={() => deleteProject(params.row.projectId)}
-                      variant="danger"
+                      onClick={() => detailPage(params.row.chemical_id)}
+                      variant="success"
                     >
-                      Delete
+                      Detail
                     </Button>
                   ),
                 },
