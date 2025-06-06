@@ -1,6 +1,6 @@
 import connectionInfo from "../schema/db.config.js";
 
-connectionInfo
+
 
 export let addGas = (req, res) => {
     const { gas_name, gas_cylinders_amount,ordered_by,vendor_name } = req.body;

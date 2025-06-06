@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS chemicals (
     'LIQUID-I-J','LIQUID-K-L','LIQUID-M-N','LIQUID-O-P','LIQUID-Q-R','LIQUID-S-T',
     'LIQUID-U-V','LIQUID-W-X','LIQUID-Y-Z'
   ) NOT NULL,
+  chemical_cas_number VARCHAR (255) NOT NULL,
   chemical_ordered_by VARCHAR(255) NOT NULL,
   chemical_delivered_date TIMESTAMP  NULL,
   chemical_priority ENUM('High','Low') NOT NULL,
