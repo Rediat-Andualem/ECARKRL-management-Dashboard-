@@ -22,12 +22,11 @@ const [response, setResponse] =useState('')
 
     try {
       const response = await axiosInstance.post("/add-user", formData);
-      console.log(response)
       if (response.status === 200) {
-        toast.success(response.data.messageToTheFront || "Registration successful!", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        // toast.success(response.data.messageToTheFront || "Registration successful!", {
+        //   position: "top-right",
+        //   autoClose: 3000,
+        // });
         setResponse(response.data.messageToTheFront)
         // if (response.data.navigation) {
         //   setTimeout(() => navigate(response.data.navigation), 2000);

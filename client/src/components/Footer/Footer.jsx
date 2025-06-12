@@ -14,7 +14,7 @@ export default function Footer() {
 
         </div>
         <div className="me-5 d-none d-lg-block">
-          <span>contact us : prakash.biswas@ch.iitr.ac.in</span>
+          <span>Contact us : prakash.biswas@ch.iitr.ac.in</span>
         </div>
 
         <div>

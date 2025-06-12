@@ -24,36 +24,33 @@ export let Route = express.Router()
 
 // user Related
 Route.get('/create-table',tableCreation)
+// user related
 Route.post('/add-user',register)
 Route.post("/login",login)
 Route.delete('/deleteProfile',deleteProfile)
 Route.post('/update-Password',forgetPassword)
 Route.post('/password-confirm/:iv/:content',confirmation)
-// chemical and consumables related
+// chemical related
 Route.post("/add-chemicals",chemicalUploader.single("chemicalReceipt"),addChemicals)
 Route.get("/getAllChemicals",getAllChemicals)
 Route.delete("/deleteChemicals/:chemicalId",deleteChemicals)
 Route.get('/singleChemical/:chemical_id',getChemicalById)
-// -------------------------------------------------------------
-
-Route.post("/add-consumables",consumableUploader.single("consumableReceipt"),consumables)
 Route.post("/chem-consu",chemicalsConsumed)
 Route.get('/remain-chemcial',chemcialNotifiyer)
 Route.get('/delete-chemical/:chemical_id',deleteChemicalImage)
+// consumable related
+Route.post("/add-consumables",consumableUploader.single("consumableReceipt"),consumables)
+
 // gas related
 Route.post("/add-gas",gasUploader.single("gassesReceipt"),addGas)
 Route.post("/gas-consumed",gasConsumed)
 Route.get('/getAllGases',getAllGasesCylinder)
-
-
-
+// gas related
 Route.get('/remain-gas',gasNotifiyer)
 Route.get('/delete-gas',zeroGasDelete)
 Route.get('/delete-gas/:gas_id',deleteGasImage)
 // ----------------
 Route.get('/delete-consumables/:consumables_id',deleteConsumableImage)
-
-
 // image related 
 Route.get('/Resource/chemicalBills/:imageName',showChemicalBills)
 Route.get('/Resource/gassesBills/:imageName',showGassesBill)

@@ -3,8 +3,6 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 const PrivateRoute = () => {
   const auth = useAuthUser();
-
-   console.log(auth)
   // If user is not authenticated, redirect to login
   if (!auth?.userID) {
     return <Navigate to="/login" replace />;

@@ -20,13 +20,13 @@ function LogIn() {
 
     try {
       const response = await axiosInstance.post("/login", { email, password });
-      console.log(response)
+      // console.log(response)
       if (!response.data.token) {
         setResponse("Incorrect email or password");
       } else {
         let token = response.data.token;
         const decodeToken = jwtDecode(token);
-        console.log(decodeToken)
+        // console.log(decodeToken)
         if (
           signIn({
             auth: { token, type: "Bearer", expiresIn: 4320 },
