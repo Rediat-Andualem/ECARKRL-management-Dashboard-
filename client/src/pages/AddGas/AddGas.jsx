@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+
+import React, { useState, useRef } from "react";
 import "./AddGas.css";
 import image from "../../image/cylinders_new.webp";
 import { MDBContainer, MDBCol, MDBRow } from "mdb-react-ui-kit";
-import { axiosInstance } from "../../Utility/urlInstance"; // make sure this is configured
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { axiosInstance } from "../../Utility/urlInstance";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddGas() {
   const [formData, setFormData] = useState({
@@ -15,8 +16,7 @@ function AddGas() {
     gas_receipt: null,
   });
 
-  const [response, setResponse] = useState();
-  const [message, setMessage] = useState();
+  const fileInputRef = useRef(null); // 👈 Ref for file input
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -27,36 +27,46 @@ function AddGas() {
     }
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const data = new FormData();
-  data.append("gas_name", formData.gas_name);
-  data.append("gas_cylinders_amount", formData.gas_cylinders_amount);
-  data.append("ordered_by", formData.ordered_by);
-  data.append("vendor_name", formData.vendor_name);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("gas_name", formData.gas_name);
+    data.append("gas_cylinders_amount", formData.gas_cylinders_amount);
+    data.append("ordered_by", formData.ordered_by);
+    data.append("vendor_name", formData.vendor_name);
 
-  if (formData.gas_receipt) {
-    data.append("gassesReceipt", formData.gas_receipt);
-  }
-
-  try {
-    const response = await axiosInstance.post("/add-gas", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    if (response.data.message) {
-      toast.success(response.data.message || "Gas added successfully!");
-    } else {
-      toast.success("Gas added successfully!");
+    if (formData.gas_receipt) {
+      data.append("gassesReceipt", formData.gas_receipt);
     }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    toast.error("Failed to submit the form. Please try again.");
-  }
-};
 
+    try {
+      const response = await axiosInstance.post("/add-gas", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      toast.success(response.data.message || "Gas added successfully!");
+
+      // ✅ Reset form fields
+      setFormData({
+        gas_name: "",
+        gas_cylinders_amount: "",
+        ordered_by: "",
+        vendor_name: "",
+        gas_receipt: null,
+      });
+
+      // ✅ Clear file input manually using ref
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Failed to submit the form. Please try again.");
+    }
+  };
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
@@ -78,54 +88,53 @@ const handleSubmit = async (e) => {
                 <select
                   className="form-select select-custom"
                   name="gas_name"
+                  value={formData.gas_name} // ✅ controlled input
                   onChange={handleChange}
                   required
                 >
-                   <option value="" disabled selected>
-                     Name Of Gas
-                   </option>
-                   <option value="Hydrogen">Hydrogen</option>
-                   <option value="Nitrogen">Nitrogen</option>
-                   <option value="Oxygen">Oxygen</option>
-                   <option value="Argon">Argon</option>
-                   <option value="Nitrogen">Nitrogen</option>
-                   <option value="Ammonia">Ammonia</option>
-                   <option value="Carbon Dioxide">Carbon Dioxide </option>
-                   <option value="Carbon Monoxide">Carbon Monoxide</option>
-                   <option value="Helium">Helium</option>
-                   <option value="Zero Air">Zero Air</option>
-                   <option value="Argon balanced Hydrogen">Argon balanced Hydrogen</option>
-                   <option value="Helium balanced Hydrogen">Helium balanced Hydrogen</option>
-                   <option value=" Helium balanced Carbon dioxide">
-                     Helium balanced Carbon dioxide
-                   </option>
-                   <option value="Methane">Methane</option>
-                   <option value="Ethane">Ethane</option>
-                   <option value="Propane">Propane</option>
-                   <option value="Butane">Butane</option>
-                   <option value="Acetylene">Acetylene</option>
-                   <option value="Chlorine">Chlorine</option>
-                   <option value="Nitrous Oxide">Nitrous Oxide</option>
-                   <option value="Hydrogen Chloride">Hydrogen Chloride</option>
-                   <option value="Ethylene">Ethylene</option>
-                   <option value="Fluorine">Fluorine</option>
-                   <option value="Krypton">Krypton</option>
-                   <option value="Xenon">Xenon</option>
-                   <option value="Neon">Neon</option>
-                   <option value="Silane">Silane</option>
-                   <option value="Phosphine">Phosphine</option>
-                   <option value="Nitric Oxide">Nitric Oxide</option>
-                   <option value="Diborane">Diborane</option>
-                   <option value="Arsine">Arsine</option>
-                   <option value="Sulfur Hexafluoride">Sulfur Hexafluoride</option>
-                   <option value="Tetrafluoromethane">Tetrafluoromethane</option>
-                   <option value="Dichlorosilane">Dichlorosilane</option>
+                  <option value="" disabled>
+                    Name Of Gas
+                  </option>
+                  <option value="Hydrogen">Hydrogen</option>
+                  <option value="Nitrogen">Nitrogen</option>
+                  <option value="Oxygen">Oxygen</option>
+                  <option value="Argon">Argon</option>
+                  <option value="Ammonia">Ammonia</option>
+                  <option value="Carbon Dioxide">Carbon Dioxide</option>
+                  <option value="Carbon Monoxide">Carbon Monoxide</option>
+                  <option value="Helium">Helium</option>
+                  <option value="Zero Air">Zero Air</option>
+                  <option value="Argon balanced Hydrogen">Argon balanced Hydrogen</option>
+                  <option value="Helium balanced Hydrogen">Helium balanced Hydrogen</option>
+                  <option value="Helium balanced Carbon dioxide">Helium balanced Carbon dioxide</option>
+                  <option value="Methane">Methane</option>
+                  <option value="Ethane">Ethane</option>
+                  <option value="Propane">Propane</option>
+                  <option value="Butane">Butane</option>
+                  <option value="Acetylene">Acetylene</option>
+                  <option value="Chlorine">Chlorine</option>
+                  <option value="Nitrous Oxide">Nitrous Oxide</option>
+                  <option value="Hydrogen Chloride">Hydrogen Chloride</option>
+                  <option value="Ethylene">Ethylene</option>
+                  <option value="Fluorine">Fluorine</option>
+                  <option value="Krypton">Krypton</option>
+                  <option value="Xenon">Xenon</option>
+                  <option value="Neon">Neon</option>
+                  <option value="Silane">Silane</option>
+                  <option value="Phosphine">Phosphine</option>
+                  <option value="Nitric Oxide">Nitric Oxide</option>
+                  <option value="Diborane">Diborane</option>
+                  <option value="Arsine">Arsine</option>
+                  <option value="Sulfur Hexafluoride">Sulfur Hexafluoride</option>
+                  <option value="Tetrafluoromethane">Tetrafluoromethane</option>
+                  <option value="Dichlorosilane">Dichlorosilane</option>
                 </select>
               </div>
               <div className="col">
                 <input
                   type="text"
                   name="gas_cylinders_amount"
+                  value={formData.gas_cylinders_amount}
                   className="form-control"
                   placeholder="Gas Cylinder Amount"
                   onChange={handleChange}
@@ -139,6 +148,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="text"
                   name="ordered_by"
+                  value={formData.ordered_by}
                   className="form-control"
                   placeholder="Gas Ordered By"
                   onChange={handleChange}
@@ -149,6 +159,7 @@ const handleSubmit = async (e) => {
                 <input
                   type="text"
                   name="vendor_name"
+                  value={formData.vendor_name}
                   className="form-control"
                   placeholder="Vendor Name"
                   onChange={handleChange}
@@ -156,11 +167,13 @@ const handleSubmit = async (e) => {
                 />
               </div>
             </div>
-                        <div data-mdb-input-init class="form-outline mb-4">
+
+            <div className="form-outline mb-4">
               <label className="label" htmlFor="fileUpload">
                 Attach receipt (Optional)
               </label>
               <input
+                ref={fileInputRef}
                 id="fileUpload"
                 className="in11 mt-4"
                 name="gassesReceipt"
@@ -177,7 +190,7 @@ const handleSubmit = async (e) => {
           </form>
         </MDBCol>
       </MDBRow>
-        <ToastContainer />
+      <ToastContainer />
     </MDBContainer>
   );
 }

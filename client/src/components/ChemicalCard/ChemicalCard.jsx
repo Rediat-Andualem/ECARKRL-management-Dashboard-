@@ -4,10 +4,10 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import Box from '@mui/joy/Box';
-import { Button } from 'react-bootstrap';
-import { Link,useNavigate} from 'react-router-dom';
+import { Button, Modal } from 'react-bootstrap';  // Import Modal here
+import { Link, useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../Utility/urlInstance';
-
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const subscriptMap = {
@@ -23,15 +23,18 @@ const subscriptMap = {
   '9': '₉',
 };
 
+
+
 function changeFormula(formula) {
   return formula?.replace(/\d/g, digit => subscriptMap[digit]) || '';
 }
 
 export default function ChemicalDetailCard({ chemical, onDelete }) {
-  
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Modal open/close state
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+const auth = useAuthUser()
 
   const {
     chemical_name,
@@ -57,69 +60,86 @@ export default function ChemicalDetailCard({ chemical, onDelete }) {
   const baseUrl = axiosInstance.defaults.baseURL;
   const billUrl = `${baseUrl}/${chemical_bill_path?.replace(/\\/g, '/')}`;
 
-  const deleteChemicalImage = async (chemicalId) => {
+
+  const deleteChemicalImage = async () => {
     try {
       setLoading(true);
-      await axiosInstance.get(`/delete-chemical/${chemicalId}`);
-      onDelete?.(chemicalId); 
-      navigate('/dashboard')
+      await axiosInstance.delete(`/delete-chemical/${chemical_id}`);
+      onDelete?.(chemical_id);
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error deleting chemical:', error.message);
     } finally {
       setLoading(false);
+      setShowModal(false); 
     }
   };
 
   return (
-    <Card
-      orientation="horizontal"
-      variant="outlined"
-      sx={{ width: '100%', display: 'flex', gap: 2, p: 2 }}
-    >
-      {/* Left: PDF Preview (optional) */}
-      {/* <Box sx={{ width: '40%', minWidth: 200 }}>
-        <Document file={billUrl} loading="Loading PDF...">
-          <Page pageNumber={1} width={200} />
-        </Document>
-      </Box> */}
-
-      {/* Right: Chemical Info */}
-      <CardContent
-        sx={{
-          margin: '40px auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
-          height: '100%',
-        }}
+    <>
+      <Card
+        orientation="horizontal"
+        variant="outlined"
+        sx={{ width: '40%', display: 'flex', gap: 2, p: 2, margin: "5% auto" }}
       >
-        <Typography level="title-lg">{chemical_name}</Typography>
-        <Typography><b>Formula:</b> {formattedFormula}</Typography>
-        <Typography><b>CAS #:</b> {chemical_cas_number}</Typography>
-        <Typography><b>Purity:</b> {chemical_purity}%</Typography>
-        <Typography><b>State:</b> {chemical_state}</Typography>
-        <Typography><b>Amount:</b> {chemical_amount} {chemical_unit_of_measurement}</Typography>
-        <Typography><b>Manufacturer: </b>{chemical_manufacturer}</Typography>
-        <Typography><b>Location:</b> {chemical_location}</Typography>
-        <Typography><b>Packaging:</b> {chemical_packaging}</Typography>
-        <Typography><b>Priority:</b> {chemical_priority}</Typography>
-        <Typography><b>Expires: </b>{chemical_expire_date}</Typography>
-        <Typography><b>Ordered By:</b> {chemical_ordered_by}</Typography>
-        <Typography><b>Vendor:</b> {chemical_vender_name}</Typography>
-        <Typography><b>Delivered: </b>{new Date(chemical_delivered_date).toLocaleDateString()}</Typography>
-        {chemical_bill_path && (
-          <Typography>
-            <Link to={billUrl} target="_blank" rel="noopener noreferrer">Click To View Bill</Link>
-          </Typography>
-        )}
-        <Button
-          variant="danger"
-          onClick={() => deleteChemicalImage(chemical_id)}
-          disabled={loading}
+        {/* Chemical Info */}
+        <CardContent
+          sx={{
+            margin: '40px auto',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            height: '100%',
+          }}
         >
-          {loading ? 'Deleting...' : 'Delete'}
-        </Button>
-      </CardContent>
-    </Card>
+          <Typography level="title-lg"><b>Name of chemical : </b>{chemical_name}</Typography>
+          <Typography><b>Formula:</b> {formattedFormula}</Typography>
+          <Typography><b>CAS #:</b> {chemical_cas_number}</Typography>
+          <Typography><b>Purity:</b> {chemical_purity}%</Typography>
+          <Typography><b>State:</b> {chemical_state}</Typography>
+          <Typography><b>Amount:</b> {chemical_amount} {chemical_unit_of_measurement}</Typography>
+          <Typography><b>Manufacturer: </b>{chemical_manufacturer}</Typography>
+          <Typography><b>Location:</b> {chemical_location}</Typography>
+          <Typography><b>Packaging:</b> {chemical_packaging}</Typography>
+          <Typography><b>Priority:</b> {chemical_priority}</Typography>
+          <Typography><b>Expires: </b>{chemical_expire_date}</Typography>
+          <Typography><b>Ordered By:</b> {chemical_ordered_by}</Typography>
+          <Typography><b>Vendor:</b> {chemical_vender_name}</Typography>
+          <Typography><b>Delivered: </b>{new Date(chemical_delivered_date).toLocaleDateString()}</Typography>
+          {chemical_bill_path && (
+            <Typography>
+              <Link to={billUrl} target='__blank' rel="noopener noreferrer">Click To View Bill</Link>
+            </Typography>
+          )}
+          {
+           auth.userRole ==='1' &&  <Button
+            style={{ width: "150px", margin: "5px" }}
+            variant="danger"
+            onClick={() => setShowModal(true)}  
+            disabled={loading}
+          >
+            {loading ? 'Deleting...' : 'Delete'}
+          </Button>
+          }
+         
+        </CardContent>
+      </Card>
+
+      {/* Confirmation Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this chemical?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteChemicalImage} disabled={loading}>
+            {loading ? 'Deleting...' : 'Yes'}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }

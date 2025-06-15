@@ -10,7 +10,9 @@ import RegisterConsumables from "../AddConsumables/AddConsumables"
 import AddGasConsumed from "../GasConsumed/GasConsumed"
 import ListChemicals from "../ListChemicals/ListChemicals"
 import ListConsumables from "../ListConsumables/ListConsumables"
-import ListGases from "../ListGases/ListGases"
+import ListGases from "../ListGases/ListGases.jsx"
+import OldGasBills from "../OldGasBills/OldGasBills.jsx"
+
 
 function LandingPage() {
   const userData = useAuthUser();
@@ -43,6 +45,9 @@ function LandingPage() {
       case "listGases":
         setSelectedComponent(<ListGases />);
         break;
+      case "oldGasBills":
+        setSelectedComponent(<OldGasBills />);
+        break;
       default:
         setSelectedComponent(null);
     }
@@ -59,19 +64,24 @@ function LandingPage() {
           <hr className={`text-white`} />
           <div className="container p-5">
             <button className={styles.buttonStyle} onClick={() => renderComponent("AddChemicals")}>
-              Add Chemicals
+              Register Chemicals
             </button>
             <br />
             <button className={styles.buttonStyle} onClick={() => renderComponent("AddGases")}>
-              Add Gas
+              Register Gas Cylinder
             </button>
             <br />
             <button className={styles.buttonStyle} onClick={() => renderComponent("RegisterConsumables")}>
-              Consumables Registration
+              Register Consumables
             </button>
             <br />
+                <hr className={`text-white`} />
             <button className={styles.buttonStyle} onClick={() => renderComponent("AddGasConsumed")}>
              Gas cylinder consumed
+            </button>
+            <br />
+            <button className={styles.buttonStyle} onClick={() => renderComponent("oldGasBills")}>
+             Old gas bills
             </button>
              <hr className={`text-white`} />
               <button className={styles.buttonStyle} onClick={() => renderComponent("listChemicals")}>

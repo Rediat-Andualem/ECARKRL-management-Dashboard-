@@ -41,42 +41,68 @@ function AddChemical() {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const data = new FormData();
+  try {
+    const data = new FormData();
 
-      for (const key in formData) {
-        if (key !== "receipt") {
-          data.append(key, formData[key]);
-        }
+    for (const key in formData) {
+      if (key !== "receipt") {
+        data.append(key, formData[key]);
       }
-      // Append the file if exists
-      if (formData.receipt) {
-        data.append("chemicalReceipt", formData.receipt);
-      }
-
-      const addedData = await axiosInstance.post("/add-chemicals", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Chemical added successfully:", addedData.data);
-      toast.success("Chemical added successfully!");
-    } catch (error) {
-      console.error("Error adding chemical:", error);
-      toast.error("Error adding chemical. Please try again!");
     }
-  };
+    // Append the file if exists
+    if (formData.receipt) {
+      data.append("chemicalReceipt", formData.receipt);
+    }
+
+    const addedData = await axiosInstance.post("/add-chemicals", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log("Chemical added successfully:", addedData.data);
+    toast.success("Chemical added successfully!");
+
+    // ✅ Reset form after successful submission
+    setFormData({
+      chemicalName: "",
+      chemicalFormula: "",
+      chemicalPurity: "",
+      chemicalManufacturer: "",
+      chemicalState: "",
+      chemicalAmount: "",
+      unitOfMeasurement: "",
+      chemicalLocation: "",
+      chemicalOrderedBy: "",
+      vendorName: "",
+      chemicalPackaging: "",
+      chemicalExpireDate: "",
+      chemicalPriority: "",
+      receipt: null,
+    });
+
+    // Optional: reset file input manually if needed
+    document.getElementById("fileUpload").value = "";
+  } catch (error) {
+    console.error("Error adding chemical:", error);
+    toast.error("Error adding chemical. Please try again!");
+  }
+};
+
 
   return (
     <>
-      <MDBContainer fluid className="p-3 my-5 h-custom">
+      <MDBContainer fluid className="my-5 h-custom">
         <MDBRow className="mx-3">
-          <MDBCol col="10" md="6" >
-            <img src={image} class="img-fluid retouch d-none d-md-block" alt="Sample image" />
+          <MDBCol col="10" md="6">
+            <img
+              src={image}
+              class="img-fluid retouch d-none d-md-block"
+              alt="Sample image"
+            />
           </MDBCol>
           <MDBCol col="3" md="5" className="mx-3">
             <div className="d-flex flex-row align-items-center justify-content-center">
@@ -117,8 +143,6 @@ function AddChemical() {
                   </div>
                 </div>
               </div>
-
-
 
               <div data-mdb-input-init class="form-outline mb-4">
                 <input
@@ -173,7 +197,7 @@ function AddChemical() {
                 </select>
               </div>
 
-              <div class="row mb-4">
+              <div class="row mb-1">
                 <div class="col">
                   <div data-mdb-input-init class="form-outline">
                     <input
@@ -281,35 +305,39 @@ function AddChemical() {
                   </div>
                 </div>
               </div>
-
-              <div data-mdb-input-init class="form-outline mb-4">
-                <select
-                  required
-                  data-mdb-select-init
-                  class="select form-select select-custom"
-                  id="chemicalPackaging"
-                  value={formData.chemicalPackaging}
-                  onChange={handleSelectChange}
-                >
-                  <option value="" disabled selected>
-                    Chemical Packaging
-                  </option>
-                  <option value="GLASS">Glass</option>
-                  <option value="PLASTIC">Plastic</option>
-                  <option value="OTHER CONTAINER">Other Container</option>
-                </select>
-              </div>
-
-              <div data-mdb-input-init class="form-outline mb-4">
-                <input
-                  required
-                  type="text"
-                  id="chemicalExpireDate"
-                  class="form-control"
-                  placeholder="Chemical Expire Date (MM/YYYY)"
-                  value={formData.chemicalExpireDate}
-                  onChange={handleChange}
-                />
+              <div className="row">
+                <div className="col">
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <select
+                      required
+                      data-mdb-select-init
+                      class="select form-select select-custom"
+                      id="chemicalPackaging"
+                      value={formData.chemicalPackaging}
+                      onChange={handleSelectChange}
+                    >
+                      <option value="" disabled selected>
+                        Chemical Packaging
+                      </option>
+                      <option value="GLASS">Glass</option>
+                      <option value="PLASTIC">Plastic</option>
+                      <option value="OTHER CONTAINER">Other Container</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="col">
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input
+                      required
+                      type="text"
+                      id="chemicalExpireDate"
+                      class="form-control"
+                      placeholder="Chemical Expire Date (MM/YYYY)"
+                      value={formData.chemicalExpireDate}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div data-mdb-input-init class="form-outline mb-4">
