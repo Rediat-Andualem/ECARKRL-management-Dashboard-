@@ -1,21 +1,21 @@
 import express from 'express'
 import {tableCreation} from '../controllers/tableCreator.js'
-import {register} from '../controllers/RegisterControler.js'
+import {register,deleteUserById,getAllUsers} from '../controllers/RegisterControler.js'
 import {login} from '../controllers/LoginControler.js'
 import {addChemicals,getAllChemicals,deleteChemicals,getChemicalById}  from '../controllers/addChemical.js'
-import {addGas} from '../controllers/addGas.js'
+import {addGas,getJunkFiles,deleteBillFileForGas} from '../controllers/addGas.js'
 import {chemicalsConsumed}  from '../controllers/chemicalConsumed.js'
 import {gasConsumed,getAllGasesCylinder} from '../controllers/gasesConsumed.js'
 import {chemcialNotifiyer,gasNotifiyer,zeroGasDelete} from '../middleware/chemialAndGasNotification.js'
-import {consumables,deleteConsumables} from '../controllers/consumablesRegisteration.js'
+import {consumables,getAllConsumables} from '../controllers/consumablesRegisteration.js'
 import createImageUploader from '../middleware/ImageUploader.js'
 import { deleteChemicalImage,deleteGasImage,deleteConsumableImage } from '../Resources/toDelete.js'
-import {deleteProfile} from '../controllers/deleteUser.js'
+
 import {showChemicalBills,showConsumablesBill,showGassesBill} from '../controllers/imageSender.js'
 
 const chemicalUploader = createImageUploader('Resources/chemicalBills');
 const gasUploader = createImageUploader('Resources/gasBills');
-const consumableUploader = createImageUploader('Resources/consumables');
+const consumableUploader = createImageUploader('Resources/consumableBills');
 import {forgetPassword,confirmation} from '../controllers/ForgotPasswordConfiguration.js'
 
 
@@ -27,31 +27,33 @@ Route.get('/create-table',tableCreation)
 // user related
 Route.post('/add-user',register)
 Route.post("/login",login)
-Route.delete('/deleteProfile',deleteProfile)
+Route.delete('/deleteProfile',deleteUserById)
+Route.get('/getAllUsers',getAllUsers)
+// ----
 Route.post('/update-Password',forgetPassword)
 Route.post('/password-confirm/:iv/:content',confirmation)
 // chemical related
 Route.post("/add-chemicals",chemicalUploader.single("chemicalReceipt"),addChemicals)
 Route.get("/getAllChemicals",getAllChemicals)
-Route.delete("/deleteChemicals/:chemicalId",deleteChemicals)
+// Route.delete("/deleteChemicals/:chemicalId",deleteChemicals)
 Route.get('/singleChemical/:chemical_id',getChemicalById)
 Route.post("/chem-consu",chemicalsConsumed)
 Route.get('/remain-chemcial',chemcialNotifiyer)
-Route.get('/delete-chemical/:chemical_id',deleteChemicalImage)
+Route.delete('/delete-chemical/:chemical_id',deleteChemicalImage)
 // consumable related
 Route.post("/add-consumables",consumableUploader.single("consumableReceipt"),consumables)
-
+Route.get('/getAllConsumables',getAllConsumables)
+Route.delete('/delete-consumables/:consumables_id',deleteConsumableImage)
 // gas related
 Route.post("/add-gas",gasUploader.single("gassesReceipt"),addGas)
 Route.post("/gas-consumed",gasConsumed)
 Route.get('/getAllGases',getAllGasesCylinder)
-// gas related
 Route.get('/remain-gas',gasNotifiyer)
 Route.get('/delete-gas',zeroGasDelete)
-Route.get('/delete-gas/:gas_id',deleteGasImage)
-// ----------------
-Route.get('/delete-consumables/:consumables_id',deleteConsumableImage)
+Route.delete('/delete-gas/:gas_id',deleteGasImage)
+Route.get('/junkGasFiles',getJunkFiles)
+Route.delete('/deleteJunkGasFiles/:fileName',deleteBillFileForGas)
 // image related 
-Route.get('/Resource/chemicalBills/:imageName',showChemicalBills)
-Route.get('/Resource/gassesBills/:imageName',showGassesBill)
-Route.get('/Resource/consumableBills/:imageName',showConsumablesBill)
+Route.get('/Resources/chemicalBills/:imageName',showChemicalBills)
+Route.get('/Resources/gasBills/:imageName',showGassesBill)
+Route.get('/Resources/consumableBills/:imageName',showConsumablesBill)

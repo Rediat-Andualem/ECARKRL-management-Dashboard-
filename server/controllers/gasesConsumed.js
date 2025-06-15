@@ -74,7 +74,7 @@ console.log(gas_cylinders_consumed,gas_id)
 
 export let getAllGasesCylinder = async (req, res) => {
   try {
-    const [rows] = await executeQuery('SELECT * FROM gases');
+    const rows = await executeQuery('SELECT * FROM gases');
     
     res.status(200).json(rows);
   } catch (error) {

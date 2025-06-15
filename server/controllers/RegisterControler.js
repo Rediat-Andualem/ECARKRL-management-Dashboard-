@@ -74,5 +74,66 @@ export let register = (req,res)=>{
     }
     
 }
-export default register;
 
+
+export let getAllUsers = (req, res) => {
+    const query = `SELECT user_id, user_first_name, user_last_name, user_email, user_role, date_of_registration FROM users`;
+
+    connectionInfo.query(query, (err, results) => {
+        if (err) {
+            console.error("Error fetching users:", err.message);
+            return res.status(500).send({
+                messageToTheFront: "Unable to fetch users. Please try again later."
+            });
+        }
+
+        return res.status(200).send({
+            messageToTheFront: "Users fetched successfully",
+            users: results
+        });
+    });
+};
+
+export let deleteUserById = (req, res) => {
+    const { user_id } = req.params;
+
+    if (!user_id || isNaN(user_id)) {
+        return res.status(400).send({
+            messageToTheFront: "Invalid user ID"
+        });
+    }
+
+    // Step 1: Delete from profile
+    const deleteFromProfile = `DELETE FROM profile WHERE user_id = ?`;
+
+    connectionInfo.query(deleteFromProfile, [user_id], (err, result1) => {
+        if (err) {
+            console.error("Error deleting from profile:", err.message);
+            return res.status(500).send({
+                messageToTheFront: "Failed to delete user profile."
+            });
+        }
+
+        // Step 2: Delete from users
+        const deleteFromUsers = `DELETE FROM users WHERE user_id = ?`;
+
+        connectionInfo.query(deleteFromUsers, [user_id], (err, result2) => {
+            if (err) {
+                console.error("Error deleting user:", err.message);
+                return res.status(500).send({
+                    messageToTheFront: "Failed to delete user."
+                });
+            }
+
+            if (result2.affectedRows === 0) {
+                return res.status(404).send({
+                    messageToTheFront: "User not found"
+                });
+            }
+
+            return res.status(200).send({
+                messageToTheFront: "User deleted successfully"
+            });
+        });
+    });
+};

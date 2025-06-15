@@ -82,5 +82,5 @@ export let deleteGasImage = (req, res) => {
 };
 
 export let deleteConsumableImage = (req, res) => {
-    deleteImageAndData(req, res, 'consumables', 'consumables_id', 'Picture_location', 'consumables');
+    deleteImageAndData(req, res, 'consumables', 'consumables_id', 'Picture_location', 'consumableBills');
 };

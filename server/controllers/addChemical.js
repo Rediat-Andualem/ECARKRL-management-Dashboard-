@@ -1,7 +1,7 @@
 import connectionInfo from "../schema/db.config.js";
 
 
-// Helper function to query the database
+
 const executeQuery = (query, params = []) => {
   return new Promise((resolve, reject) => {
     connectionInfo.query(query, params, (err, data) => {
@@ -64,7 +64,6 @@ export let addChemicals = async (req, res) => {
         chemicalPriority,
         casNumber
     } = req.body;
-console.log(req.body)
     const imageFilePath = req.file ? req.file.path : 'not provided';
 
 
@@ -156,6 +155,10 @@ export let deleteChemicals = async (req, res) => {
     res.status(500).json({ message: 'Failed to delete chemical', error });
   }
 };
+
+
+
+
 
 export let getChemicalById = async (req, res) => {
   const { chemical_id} = req.params;
