@@ -99,7 +99,7 @@ function ListOfGases() {
           No Gas list to show <PiSmileySadThin />{" "}
         </h4>
       ) : (
-        <Paper sx={{ height: "80%", width: "70%", margin: "auto" }}>
+        <Paper sx={{ height: "80%", width: "75%", margin: "auto" }}>
           <DataGrid
             rows={filteredGases?.map((singleGas, i) => {
               return {

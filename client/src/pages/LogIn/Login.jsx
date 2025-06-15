@@ -16,7 +16,7 @@ function LogIn() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error state
+    setError(""); 
 
     try {
       const response = await axiosInstance.post("/login", { email, password });
@@ -60,9 +60,9 @@ function LogIn() {
         <h3 className={styles.title}>Log In</h3>
 
         {response && (
-          <span style={{ color: "#f09819", fontWeight: "bold" }}>
+          <small style={{ color: "#f09819", fontWeight: "bold" }}>
             {response}
-          </span>
+          </small>
         )}
 
         <label htmlFor="email">Email</label>

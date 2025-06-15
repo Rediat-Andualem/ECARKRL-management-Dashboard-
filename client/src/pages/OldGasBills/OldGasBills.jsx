@@ -109,7 +109,7 @@ function OldGasBills() {
           No Gas bills to show <PiSmileySadThin />{" "}
         </h4>
       ) : (
-        <Paper sx={{ height: "80%", width: "35%", margin: "auto" }}>
+        <Paper sx={{ height: "80%", width: "45%", margin: "auto" }}>
           <DataGrid
             rows={filteredGases?.map((singleGas, i) => {
               return {

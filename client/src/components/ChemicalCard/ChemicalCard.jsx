@@ -66,7 +66,7 @@ const auth = useAuthUser()
       setLoading(true);
       await axiosInstance.delete(`/delete-chemical/${chemical_id}`);
       onDelete?.(chemical_id);
-      navigate('/dashboard');
+      navigate('/listChemicals');
     } catch (error) {
       console.error('Error deleting chemical:', error.message);
     } finally {

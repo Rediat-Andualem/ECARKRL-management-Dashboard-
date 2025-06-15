@@ -63,8 +63,8 @@ function AddGas() {
       }
 
     } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Failed to submit the form. Please try again.");
+      console.error(error);
+      toast.error(error.response.data? error.response.data.message : "Error adding gas cylinders. Please try again!");
     }
   };
 

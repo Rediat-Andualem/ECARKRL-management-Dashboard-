@@ -87,8 +87,8 @@ const handleSubmit = async (e) => {
     // Optional: reset file input manually if needed
     document.getElementById("fileUpload").value = "";
   } catch (error) {
-    console.error("Error adding chemical:", error);
-    toast.error("Error adding chemical. Please try again!");
+    console.error(error.response.data);
+    toast.error(error.response.data? error.response.data.message : "Error adding chemical. Please try again!");
   }
 };
 
