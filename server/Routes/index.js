@@ -6,7 +6,7 @@ import {addChemicals,getAllChemicals,deleteChemicals,getChemicalById}  from '../
 import {addGas,getJunkFiles,deleteBillFileForGas} from '../controllers/addGas.js'
 import {chemicalsConsumed}  from '../controllers/chemicalConsumed.js'
 import {gasConsumed,getAllGasesCylinder} from '../controllers/gasesConsumed.js'
-import {chemcialNotifiyer,gasNotifiyer,zeroGasDelete} from '../middleware/chemialAndGasNotification.js'
+// import {chemcialNotifiyer,gasNotifiyer,zeroGasDelete} from '../middleware/chemialAndGasNotification.js'
 import {consumables,getAllConsumables} from '../controllers/consumablesRegisteration.js'
 import createImageUploader from '../middleware/ImageUploader.js'
 import { deleteChemicalImage,deleteGasImage,deleteConsumableImage } from '../Resources/toDelete.js'
@@ -27,7 +27,7 @@ Route.get('/create-table',tableCreation)
 // user related
 Route.post('/add-user',register)
 Route.post("/login",login)
-Route.delete('/deleteProfile',deleteUserById)
+Route.delete('/deleteProfile/:user_id',deleteUserById)
 Route.get('/getAllUsers',getAllUsers)
 // ----
 Route.post('/update-Password',forgetPassword)
@@ -38,7 +38,7 @@ Route.get("/getAllChemicals",getAllChemicals)
 // Route.delete("/deleteChemicals/:chemicalId",deleteChemicals)
 Route.get('/singleChemical/:chemical_id',getChemicalById)
 Route.post("/chem-consu",chemicalsConsumed)
-Route.get('/remain-chemcial',chemcialNotifiyer)
+// Route.get('/remain-chemcial',chemcialNotifiyer)
 Route.delete('/delete-chemical/:chemical_id',deleteChemicalImage)
 // consumable related
 Route.post("/add-consumables",consumableUploader.single("consumableReceipt"),consumables)
@@ -48,8 +48,8 @@ Route.delete('/delete-consumables/:consumables_id',deleteConsumableImage)
 Route.post("/add-gas",gasUploader.single("gassesReceipt"),addGas)
 Route.post("/gas-consumed",gasConsumed)
 Route.get('/getAllGases',getAllGasesCylinder)
-Route.get('/remain-gas',gasNotifiyer)
-Route.get('/delete-gas',zeroGasDelete)
+// Route.get('/remain-gas',gasNotifiyer)
+// Route.get('/delete-gas',zeroGasDelete)
 Route.delete('/delete-gas/:gas_id',deleteGasImage)
 Route.get('/junkGasFiles',getJunkFiles)
 Route.delete('/deleteJunkGasFiles/:fileName',deleteBillFileForGas)

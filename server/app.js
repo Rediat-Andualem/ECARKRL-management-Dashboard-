@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connectionInfo from './schema/db.config.js'
 import {Route} from './Routes/index.js'
+import './middleware/chemialAndGasNotification.js'
 dotenv.config()
 
 // *middlewares
