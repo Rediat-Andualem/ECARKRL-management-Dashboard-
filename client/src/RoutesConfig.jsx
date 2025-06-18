@@ -12,6 +12,9 @@ import ChemicalDetailsPage from "./pages/DetailsPage/ChemcialDeatils.jsx"
 import PrivateRoute from "./components/ProtectRoute/PrivateRoute.jsx";
 import PublicOnlyRoute from "./components/ProtectRoute/PublicOnlyRoute.jsx";
 import ListChemicals from "./pages/ListChemicals/ListChemicals.jsx";
+import Video from "./pages/Video/Video.jsx";
+import Manual from "./pages/Manual/Manual.jsx";
+import HowItWork from "./pages/HowItWork/HowItWork.jsx";
 const RoutesConfig = () => {
   return (
     <Routes>
@@ -20,8 +23,12 @@ const RoutesConfig = () => {
           <Route path="/SignUp" element={<LayOut><SignUp /> </LayOut>} />
           <Route path="/passwordConfirm/:iv/:content" element={<LayOut><PasswordUpdater /></LayOut>} />
           <Route path="/emailForPassword" element={<LayOut><EmailForPassword /></LayOut>} />
+         
           <Route path="/" element={<LogIn />} />
        </Route>
+        <Route path="/videos" element={<LayOut><Video /></LayOut>} />
+          <Route path="/manual" element={<LayOut><Manual /></LayOut>} />
+          <Route path="/howItWork" element={<LayOut><HowItWork /></LayOut>} />
       {/* ----------------- */}
       <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<LayOut> <LandingPage /> </LayOut>} />

@@ -17,9 +17,9 @@ function NavigationBar() {
       <Container>
         <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">How it work</Nav.Link>
-          <Nav.Link as={Link} to="/features">Manuals</Nav.Link>
-          <Nav.Link as={Link} to="/pricing">videos</Nav.Link>
+          <Nav.Link as={Link} to="/howItWork">How it work</Nav.Link>
+          <Nav.Link as={Link} to="/manual">Manuals</Nav.Link>
+          <Nav.Link as={Link} to="/videos">videos</Nav.Link>
         </Nav>
         {
           !auth? (""):(<Button variant="outline-light" onClick={handleLogout}>
