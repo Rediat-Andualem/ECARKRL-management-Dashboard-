@@ -26,6 +26,9 @@ app.use(cors({
 
 // * main routes 
 app.use('/api',Route)
+app.get('/test',(req,res)=>{
+    res.send('backend is working!')
+})
 
 
 // *connection  and server listening
