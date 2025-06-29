@@ -106,6 +106,8 @@ function AddGas() {
                   <option value="Zero Air">Zero Air</option>
                   <option value="Argon balanced Hydrogen">Argon balanced Hydrogen</option>
                   <option value="Helium balanced Hydrogen">Helium balanced Hydrogen</option>
+                  <option value="Helium balanced Hydrogen">Helium balanced Argon</option>
+                  <option value="Helium balanced Hydrogen">Helium balanced Nitrogen</option>
                   <option value="Helium balanced Carbon dioxide">Helium balanced Carbon dioxide</option>
                   <option value="Methane">Methane</option>
                   <option value="Ethane">Ethane</option>
@@ -128,6 +130,7 @@ function AddGas() {
                   <option value="Sulfur Hexafluoride">Sulfur Hexafluoride</option>
                   <option value="Tetrafluoromethane">Tetrafluoromethane</option>
                   <option value="Dichlorosilane">Dichlorosilane</option>
+                
                 </select>
               </div>
               <div className="col">

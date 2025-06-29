@@ -51,7 +51,7 @@ function ListOfGases() {
     }
   };
 
-  const paginationModel = { page: 0, pageSize: 3 };
+  const paginationModel = { page: 0, pageSize: 10 };
 
   const detailPage = (gasId) => {
     navigate(`/gasDetails/${gasId}`);

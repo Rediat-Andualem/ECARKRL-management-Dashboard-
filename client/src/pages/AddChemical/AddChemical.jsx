@@ -276,6 +276,8 @@ const handleSubmit = async (e) => {
                       <option value="LIQUID-U-V">LIQUID-U-V</option>
                       <option value="LIQUID-W-X">LIQUID-W-X</option>
                       <option value="LIQUID-Y-Z">LIQUID-Y-Z</option>
+                      <option value="FRIDGE">Fridge</option>
+                      <option value="EXPIRED-CHEMICAL">Expired chemical</option>
                     </select>
                   </div>
                 </div>

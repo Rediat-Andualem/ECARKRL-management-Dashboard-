@@ -4,7 +4,7 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import Box from '@mui/joy/Box';
-import { Button, Modal } from 'react-bootstrap';  // Import Modal here
+import { Button, Modal } from 'react-bootstrap';  
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../Utility/urlInstance';
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
@@ -31,7 +31,7 @@ function changeFormula(formula) {
 
 export default function ChemicalDetailCard({ chemical, onDelete }) {
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false); // Modal open/close state
+  const [showModal, setShowModal] = useState(false); 
 
   const navigate = useNavigate();
 const auth = useAuthUser()
