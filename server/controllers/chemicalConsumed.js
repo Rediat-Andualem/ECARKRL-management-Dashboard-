@@ -1,5 +1,7 @@
-import connectionInfo from "../schema/db.config.js";
-export let chemicalsConsumed = async (req, res) => {
+// import connectionInfo from "../schema/db.config.js";
+const connectionInfo = require("../schema/db.config.js");
+
+let chemicalsConsumed = async (req, res) => {
     try {
         const { chemical_id, user_id, amount_consumed } = req.body;
         const isNumberRegex = /^\d+$/;
@@ -53,4 +55,9 @@ export let chemicalsConsumed = async (req, res) => {
             message: "Something went wrong, please try again later"
         });
     }
+};
+
+
+module.exports = {
+chemicalsConsumed
 };

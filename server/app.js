@@ -1,14 +1,15 @@
+
 // *main imports
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import connectionInfo from './schema/db.config.js'
-import {Route} from './Routes/index.js'
-import './middleware/chemialAndGasNotification.js'
-dotenv.config()
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const connectionInfo = require('./schema/db.config.js');
+const { Route } = require('./Routes/index.js');
+require('./middleware/chemialAndGasNotification.js');
+dotenv.config();
 
 // *middlewares
-const app = express()
+const app = express();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,38 +17,43 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization,token');
     next();
-  });
-app.use(express.urlencoded({extended:true}))
-app.use(express.json())
+});
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors({
-    origin : true,
+    origin: true,
     // credentials:true
-}))
+}));
 
 // * main routes 
-app.use('/api',Route)
-app.get('/test',(req,res)=>{
-    res.send('backend is working!')
-})
+app.use('/api', Route);
+app.get('/', (req, res) => {
+    res.send('backend is working!');
+});
 
-
-// *connection  and server listening
-async function connectionHierarchy(){
+async function connectionHierarchy() {
     try {
-        // *connection with database 
-        connectionInfo.connect((err)=>{
-            if(err){
-                console.log(err)
-            }else{
-                console.log('connection with database created successfully')
-                app.listen(process.env.PORT,()=>{
-                    console.log(`app is listening to ${process.env.PORT}`)
-                })
+        // Test a connection from the pool
+        connectionInfo.getConnection((err, connection) => {
+            if (err) {
+                console.error('Database connection failed:', err);
+                return;
             }
-        })
+
+            console.log('Connection to database established successfully');
+
+            // Release the connection back to pool
+            connection.release();
+
+            // Start the server
+            app.listen(process.env.PORT, () => {
+                console.log(`App is listening on port ${process.env.PORT}`);
+            });
+        });
     } catch (err) {
-        console.log(err.message)
+        console.error('Unexpected error:', err.message);
     }
 }
-// * initializing function 
-connectionHierarchy()
+
+connectionHierarchy();
+

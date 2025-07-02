@@ -1,9 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import mime from 'mime-types';
+// import fs from 'fs';
+// import path from 'path';
+// import mime from 'mime-types';
+
+const fs = require('fs');
+const path = require('path');
+const mime = require('mime-types');
 
 
-export let showChemicalBills = (req, res) => {
+let showChemicalBills = (req, res) => {
   const { imageName } = req.params;
   const filePath = path.join('Resources', 'chemicalBills', imageName);
 
@@ -31,7 +35,7 @@ export let showChemicalBills = (req, res) => {
 };
 
 
-export let showGassesBill = (req, res) => {
+let showGassesBill = (req, res) => {
   const { imageName } = req.params;
   const filePath = path.join('Resources', 'gasBills', imageName);
 
@@ -59,7 +63,7 @@ export let showGassesBill = (req, res) => {
 };
 
 
-export let showConsumablesBill = (req, res) => {
+let showConsumablesBill = (req, res) => {
   const { imageName } = req.params;
   const filePath = path.join('Resources', 'consumableBills', imageName);
 console.log(filePath)
@@ -88,6 +92,11 @@ console.log(filePath)
 };
 
 
+module.exports = {
+showChemicalBills,
+showGassesBill,
+showConsumablesBill
+};
 
 
 

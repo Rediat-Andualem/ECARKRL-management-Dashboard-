@@ -1,4 +1,4 @@
-export let chemicals = `
+let chemicals = `
 CREATE TABLE IF NOT EXISTS chemicals (
   chemical_id INT AUTO_INCREMENT,
   chemical_name VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS chemicals (
     'SOLID-K-L','SOLID-M-N','SOLID-O-P','SOLID-Q-R','SOLID-S-T','SOLID-U-V',
     'SOLID-W-X','SOLID-Y-Z','LIQUID-A-B','LIQUID-C-D','LIQUID-E-F','LIQUID-G-H',
     'LIQUID-I-J','LIQUID-K-L','LIQUID-M-N','LIQUID-O-P','LIQUID-Q-R','LIQUID-S-T',
-    'LIQUID-U-V','LIQUID-W-X','LIQUID-Y-Z'
+    'LIQUID-U-V','LIQUID-W-X','LIQUID-Y-Z',FRIDGE,EXPIRED-CHEMICAL
   ) NOT NULL,
   chemical_cas_number VARCHAR (255) NOT NULL,
   chemical_ordered_by VARCHAR(255) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS chemicals (
   PRIMARY KEY (chemical_id)
 )`;
 
-export let registration = `
+let registration = `
 CREATE TABLE IF NOT EXISTS users (
   user_id INT AUTO_INCREMENT,
   user_first_name VARCHAR(225) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY (user_id)
 )`;
 
-export let profile = `
+let profile = `
 CREATE TABLE IF NOT EXISTS profile (
   profile_id INT AUTO_INCREMENT,
   user_id INT NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS profile (
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 )`;
 
-export let gases = `
+let gases = `
 CREATE TABLE IF NOT EXISTS gases (
   gas_id INT AUTO_INCREMENT,
   gas_name VARCHAR(255) NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS gases (
   PRIMARY KEY (gas_id)
 )`;
 
-export let chemicalsConsumed = `
+let chemicalsConsumed = `
 CREATE TABLE IF NOT EXISTS chemicals_consumed (
   chemical_consumption_id INT AUTO_INCREMENT,
   chemical_id INT NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS chemicals_consumed (
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 )`;
 
-export let gasesConsumed = `
+let gasesConsumed = `
 CREATE TABLE IF NOT EXISTS gases_consumed (
   gas_consumption_id INT AUTO_INCREMENT,
   gas_id INT NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS gases_consumed (
 )`;
 
 
-export let consumables = `
+let consumables = `
 CREATE TABLE IF NOT EXISTS consumables (
   consumables_id INT AUTO_INCREMENT,
   consumable_name TEXT NOT NULL,
@@ -112,3 +112,14 @@ CREATE TABLE IF NOT EXISTS consumables (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (consumables_id)
 )`;
+
+
+module.exports = {
+chemicals,
+registration,
+profile,
+gases,
+chemicalsConsumed,
+gasesConsumed,
+consumables
+};

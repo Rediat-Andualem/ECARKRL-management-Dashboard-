@@ -1,6 +1,7 @@
-import multer from 'multer';
-import path from 'path';
-
+// import multer from 'multer';
+// import path from 'path';
+const multer = require('multer');
+const path = require('path');
 // Function to create uploader for images + PDFs
 const createUploader = (directory) => {
  
@@ -37,4 +38,6 @@ const createUploader = (directory) => {
    
 };
 
-export default createUploader;
+module.exports = {
+createUploader
+};

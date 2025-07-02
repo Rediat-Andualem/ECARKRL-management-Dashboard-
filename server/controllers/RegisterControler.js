@@ -1,6 +1,10 @@
-import connectionInfo from "../schema/db.config.js"
-import  bcrypt from 'bcrypt'
-export let register = (req,res)=>{
+// import connectionInfo from "../schema/db.config.js"
+// import  bcrypt from 'bcrypt'
+const connectionInfo = require("../schema/db.config.js");
+const bcrypt = require('bcrypt');
+
+
+ let register = (req,res)=>{
     const {user_first_name,user_last_name,user_email,user_password} = req.body
 
     const isEmail =/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/
@@ -76,7 +80,7 @@ export let register = (req,res)=>{
 }
 
 
-export let getAllUsers = (req, res) => {
+ let getAllUsers = (req, res) => {
     const query = `SELECT user_id, user_first_name, user_last_name, user_email, user_role, date_of_registration FROM users`;
 
     connectionInfo.query(query, (err, results) => {
@@ -94,7 +98,7 @@ export let getAllUsers = (req, res) => {
     });
 };
 
-export let deleteUserById = (req, res) => {
+ let deleteUserById = (req, res) => {
     const { user_id } = req.params;
 
     if (!user_id || isNaN(user_id)) {
@@ -136,4 +140,11 @@ export let deleteUserById = (req, res) => {
             });
         });
     });
+};
+
+
+module.exports = {
+  register,
+  getAllUsers,
+  deleteUserById
 };

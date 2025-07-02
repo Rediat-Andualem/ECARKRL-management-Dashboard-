@@ -1,5 +1,5 @@
-import connectionInfo from "../schema/db.config.js";
-
+// import connectionInfo from "../schema/db.config.js";
+const connectionInfo = require("../schema/db.config.js");
 
 
 const executeQuery = (query, params = []) => {
@@ -15,7 +15,7 @@ const executeQuery = (query, params = []) => {
 };
 
 
-export const validateChemicalFields = (data) => { 
+const validateChemicalFields = (data) => { 
  const isStringRegex = /^[A-Za-z\s]+$/;
     const isNumberRegex = /^\d+$/;
     const monthAndYear = /^(0[1-9]|1[0-2])\/\d{4}$/;
@@ -47,7 +47,7 @@ export const validateChemicalFields = (data) => {
 };
 
 
-export let addChemicals = async (req, res) => {
+let addChemicals = async (req, res) => {
     const {
         chemicalName,
         chemicalFormula,
@@ -130,7 +130,7 @@ export let addChemicals = async (req, res) => {
 };
 
 
-export let getAllChemicals = async (req, res) => {
+let getAllChemicals = async (req, res) => {
   try {
     const rows = await executeQuery('SELECT * FROM chemicals');
     res.status(200).json(rows);
@@ -140,7 +140,7 @@ export let getAllChemicals = async (req, res) => {
   }
 };
 
-export let deleteChemicals = async (req, res) => {
+let deleteChemicals = async (req, res) => {
   const { chemicalId } = req.params;
 
   try {
@@ -156,11 +156,7 @@ export let deleteChemicals = async (req, res) => {
   }
 };
 
-
-
-
-
-export let getChemicalById = async (req, res) => {
+let getChemicalById = async (req, res) => {
   const { chemical_id} = req.params;
 
   try {
@@ -175,4 +171,11 @@ export let getChemicalById = async (req, res) => {
     console.error('Error fetching chemical by ID:', error);
     res.status(500).json({ message: 'Failed to fetch chemical', error });
   }
+};
+
+module.exports = {
+addChemicals,
+getAllChemicals,
+deleteChemicals,
+getChemicalById
 };

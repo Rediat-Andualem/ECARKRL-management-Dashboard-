@@ -1,11 +1,16 @@
-import connectionInfo from '../schema/db.config.js'
-import {decrypt,encrypt} from '../middleware/IncriptionDicripitonLogic.js'
-import bcrypt from 'bcrypt'
-import nodemailer from 'nodemailer'
+// import connectionInfo from '../schema/db.config.js'
+// import {decrypt,encrypt} from '../middleware/IncriptionDicripitonLogic.js'
+// import bcrypt from 'bcrypt'
+// import nodemailer from 'nodemailer'
 
-export let forgetPassword = async (req, res) => {
+const connectionInfo = require('../schema/db.config.js');
+const { decrypt, encrypt } = require('../middleware/IncriptionDicripitonLogic.js');
+const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+
+let forgetPassword = async (req, res) => {
   const {user_email} = req.body;
-console.log(user_email)
+
   try {
     const [data] = await connectionInfo.promise().query('SELECT user_email, user_id FROM users WHERE user_email = ?', [user_email]);    
     if (!data || data.length === 0) {
@@ -130,7 +135,7 @@ console.log(user_email)
 };
 
 
- export let confirmation =(req,res)=>{
+ let confirmation =(req,res)=>{
     const {iv,content}= req.params
     const {user_password} =req.body
     // console.log(iv,content,user_password)
@@ -158,3 +163,7 @@ console.log(user_email)
  }
 
 
+module.exports = {
+forgetPassword,
+confirmation
+};

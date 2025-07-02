@@ -3,19 +3,28 @@ user role = 1 for admin
 user role = 2 for inactive or graduated students
 
 
+4. navigate seyarege after action wede main dashboard sayhone wede neberebete page endihade marege  yaw navigate emilewn mechemer new ke action behuala
 
 
+future task 
 
-TASK 
-crosscheck the controller along with the modified things like vendor ... enums added etc
-gas and chemical consumed controller figure out how to do it 
-authentication 
-dashboard 
-  1.on login user will find (add chemical, add Gas , add consumable , search chemicals , search gas, search consumable,)
-    for admin (including the above.. delete profile, )
+video adding   title , video link from youtube  ( adding and deleting functionality for admin )
+manual adding  title , file uploading button  ( uploading and deleting functionality for admin )
+attach it with the main website 
+                 1. Home page  :   lab facility image and name ( and db create argo lab facility yemil, then image , category , name) ( add and delete  functionality )
+                                 project yemil table create argo yaw image decryption and price melewen column azegageto componentune metekem ( add , delete functionality)
+
+                 2. Gallery page : gallery emile db create argo image ena description yemel create argo ( add and delete functionality ) mechemer new keza in raw three image becah endinore maege new small size one column and in medium two and big 3 
+
+                 3. student page : current  ena alumni yemel category argo photo upload menorew if someone is alumini or current hulate card azegagteto move marege new wede almuni weyem degmo with a button wede alumni move marege maschale move to alumni bemalet  (ስቱደንት ሆነው ክሬት ይደረጋሉ ወደ አልሙናይ ይዛወራሉይዛወራሉ)
 
 
-
-1. navigate back sederege wede dasboard sayhone ewede kedemew mehade alebete 
-2. form clearing should be there after adding chemcail or other things    
-3. pdf display problem  
+    #  for deployment 
+                # DATABASE =evangaka_ecarkrldb
+                # USER = evangaka_ecarkrladmin
+                # PASSWORD = Ecarkrl@524334
+                # HOST = 192.250.239.84
+                # JWT_SECRET=ECRKRL_SECRET
+                # PORT=7500
+                # REFRESH_TOKEN_SECRET=ECRKRL_RSECRET
+                # FRONT_END_LINK=http://localhost:5173  

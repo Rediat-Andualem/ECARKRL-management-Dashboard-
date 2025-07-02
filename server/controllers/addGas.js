@@ -1,9 +1,15 @@
-import connectionInfo from "../schema/db.config.js";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+// import connectionInfo from "../schema/db.config.js";
+// import fs from "fs";
+// import path from "path";
+// import { fileURLToPath } from "url";
 
-export let addGas = (req, res) => {
+const connectionInfo = require("../schema/db.config.js");
+const fs = require("fs");
+const path = require("path");
+// const { fileURLToPath } = require("url");
+
+
+let addGas = (req, res) => {
   const { gas_name, gas_cylinders_amount, ordered_by, vendor_name } = req.body;
   let gas_bill_path = req.file ? req.file.path : "not provided";
 
@@ -98,12 +104,42 @@ export let addGas = (req, res) => {
 };
 
 // this will delete teh files which are remaining in the gasBills folder not in the database
-export let deleteBillFileForGas = (req, res) => {
-  const { fileName } = req.params; // Expecting the filename to be passed in the URL
-   console.log(fileName)
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
+// let deleteBillFileForGas = (req, res) => {
+//   const { fileName } = req.params; // Expecting the filename to be passed in the URL
+//    console.log(fileName)
+//   const __filename = fileURLToPath(import.meta.url);
+//   const __dirname = path.dirname(__filename);
 
+//   const filePath = path.join(
+//     __dirname,
+//     "..",
+//     "Resources",
+//     "gasBills",
+//     fileName
+//   );
+
+//   // Check if the file exists
+//   if (fs.existsSync(filePath)) {
+//     // Delete the file
+//     fs.unlink(filePath, (err) => {
+//       if (err) {
+//         return res.status(500).send({ message: "Error deleting the file" });
+//       }
+
+//       res.send({ message: "File deleted successfully" });
+//     });
+//   } else {
+//     res.status(404).send({ message: "File not found" });
+//   }
+// };
+
+
+
+const deleteBillFileForGas = (req, res) => {
+  const { fileName } = req.params;
+  console.log(fileName);
+
+  // In CommonJS, __dirname is directly available
   const filePath = path.join(
     __dirname,
     "..",
@@ -119,13 +155,15 @@ export let deleteBillFileForGas = (req, res) => {
       if (err) {
         return res.status(500).send({ message: "Error deleting the file" });
       }
-
       res.send({ message: "File deleted successfully" });
     });
   } else {
     res.status(404).send({ message: "File not found" });
   }
 };
+
+
+
 
 // Controller to find junk files (files in the gasBills folder not used in the database)
 
@@ -134,19 +172,75 @@ const formatDate = (timestamp) => {
   return date.toLocaleString(); // Format the date into a human-readable string
 };
 
-export let getJunkFiles = (req, res) => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
+//  let getJunkFiles = (req, res) => {
+//   const __filename = fileURLToPath(import.meta.url);
+//   const __dirname = path.dirname(__filename);
 
+//   const folderPath = path.join(__dirname, "..", "Resources", "gasBills");
+
+//   // Read all files in the gasBills folder
+//   fs.readdir(folderPath, (err, files) => {
+//     if (err) {
+//       console.log(err);
+//       return res
+//         .status(500)
+//         .send({ message: "Error reading gasBills directory" });
+//     }
+
+//     // Get all files from the database to compare
+//     const query = `SELECT gas_bill_path FROM gases WHERE gas_bill_path != 'not provided'`;
+
+//     connectionInfo.query(query, (err, results) => {
+//       if (err) {
+//         console.error(err);
+//         return res
+//           .status(500)
+//           .send({ message: "Error fetching data from the database" });
+//       }
+
+//       // Extract the file names from gas_bill_path in the database (includes the date prefix)
+//       const usedFiles = results.map((result) => {
+//         const filePath = result.gas_bill_path;
+//         const fileName = path.basename(filePath); 
+//         return fileName; 
+//       });
+
+//       // Filter out files that are in the database
+//       const junkFiles = files.filter((file) => {
+   
+//         return !usedFiles.includes(file);
+//       });
+
+//       // Prepare the junk files data (send the full filename, including the date prefix)
+//       const junkFilesData = junkFiles.map((file) => {
+//         const filePath = `/Resources/gasBills/${file}`; 
+//         const [date, fileName] = file.split("_"); 
+        
+//         // Format the date to a human-readable string
+//         const formattedDate = formatDate(date);
+
+//         return {
+//             date,
+//           formateDate: formattedDate, 
+//           fileName: file.split("_").slice(1).join("_"), 
+//           filePath, 
+//         };
+//       });
+
+//       res.json(junkFilesData); 
+//     });
+//   });
+// };
+
+const getJunkFiles = (req, res) => {
+  // In CommonJS, __dirname is directly available
   const folderPath = path.join(__dirname, "..", "Resources", "gasBills");
 
   // Read all files in the gasBills folder
   fs.readdir(folderPath, (err, files) => {
     if (err) {
       console.log(err);
-      return res
-        .status(500)
-        .send({ message: "Error reading gasBills directory" });
+      return res.status(500).send({ message: "Error reading gasBills directory" });
     }
 
     // Get all files from the database to compare
@@ -155,9 +249,7 @@ export let getJunkFiles = (req, res) => {
     connectionInfo.query(query, (err, results) => {
       if (err) {
         console.error(err);
-        return res
-          .status(500)
-          .send({ message: "Error fetching data from the database" });
+        return res.status(500).send({ message: "Error fetching data from the database" });
       }
 
       // Extract the file names from gas_bill_path in the database (includes the date prefix)
@@ -168,10 +260,7 @@ export let getJunkFiles = (req, res) => {
       });
 
       // Filter out files that are in the database
-      const junkFiles = files.filter((file) => {
-   
-        return !usedFiles.includes(file);
-      });
+      const junkFiles = files.filter((file) => !usedFiles.includes(file));
 
       // Prepare the junk files data (send the full filename, including the date prefix)
       const junkFilesData = junkFiles.map((file) => {
@@ -182,7 +271,7 @@ export let getJunkFiles = (req, res) => {
         const formattedDate = formatDate(date);
 
         return {
-            date,
+          date,
           formateDate: formattedDate, 
           fileName: file.split("_").slice(1).join("_"), 
           filePath, 
@@ -192,4 +281,13 @@ export let getJunkFiles = (req, res) => {
       res.json(junkFilesData); 
     });
   });
+};
+
+
+
+
+module.exports = {
+addGas,
+deleteBillFileForGas,
+getJunkFiles
 };

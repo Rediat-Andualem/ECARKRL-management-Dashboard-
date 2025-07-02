@@ -1,8 +1,12 @@
-import connectionInfo from "../schema/db.config.js";
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+// import connectionInfo from "../schema/db.config.js";
+// import bcrypt from 'bcrypt';
+// import jwt from 'jsonwebtoken';
 
-export let login = (req, res) => {
+const connectionInfo = require("../schema/db.config.js");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+let login = (req, res) => {
     const { email, password } = req.body;
     const isEmail =/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/
     const isPassword =/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+}{":;'?/>.<,])(?!.*\s).{8,}$/
@@ -66,6 +70,9 @@ export let login = (req, res) => {
 
 
 
+module.exports = {
+login
+};
 
 
 

@@ -1,8 +1,6 @@
-import connectionInfo from "../schema/db.config.js";
-import nodemailer from 'nodemailer';
-import { Cron } from 'croner';
-
-
+const connectionInfo = require("../schema/db.config.js");
+const nodemailer = require('nodemailer');
+const { Cron } = require('croner');
 
 function sendNotificationEmail(type, items, allEmails) {
     const mailSender = nodemailer.createTransport({
@@ -31,7 +29,7 @@ function sendNotificationEmail(type, items, allEmails) {
     } else if (type === "gas") {
         subject = "Gas Cylinder Low Stock Alert";
         title = "Low Gas Cylinder Notification";
-        message = "Only one cylinder left for the following gases. Please order more.";
+        message = "Only one cylinder left for the following gases. Please order!";
         tableHeaders = "<tr><th>Gas Name</th></tr>";
         tableRows = items.map(g => `<tr><td>${g.gas_name}</td></tr>`).join('');
     }
@@ -40,7 +38,7 @@ function sendNotificationEmail(type, items, allEmails) {
     <html>
     <head>
         <style>
-            .container { border: 1px solid #ccc; padding: 16px; border-radius: 8px; width: 80%; margin: auto; background: #f9f9f9; }
+            .container { border: 1px solid #ccc; padding: 16px; border-radius: 8px; width: 40%; margin: auto; background: #f9f9f9; }
             h2 { color: #333; text-align: center; }
             table { width: 100%; border-collapse: collapse; }
             th, td { padding: 8px; border: 1px solid #ddd; }
@@ -75,8 +73,7 @@ function sendNotificationEmail(type, items, allEmails) {
     });
 }
 
-
-export const chemicalNotifier = async (req = {}, res = { json: () => {}, status: () => ({ json: () => {} }) }) => {
+const chemicalNotifier = async (req = {}, res = { json: () => {}, status: () => ({ json: () => {} }) }) => {
     const expiredChemicalsQuery = `
         SELECT * FROM chemicals 
         WHERE STR_TO_DATE(chemical_expire_date, '%Y-%m-%d') < CURDATE()
@@ -99,24 +96,42 @@ export const chemicalNotifier = async (req = {}, res = { json: () => {}, status:
     }
 };
 
+// const gasNotifier = async (req = {}, res = { json: () => {}, status: () => ({ json: () => {} }) }) => {
+//     const lowGasQuery = `
+//         SELECT * FROM gases 
+//         WHERE gas_cylinders_amount = 1
+//     `;
+//     const emailsQuery = `SELECT user_email FROM users`;
 
-export const gasNotifier = async (req = {}, res = { json: () => {}, status: () => ({ json: () => {} }) }) => {
-    const lowGasQuery = `
-        SELECT * FROM gases 
-        WHERE gas_cylinders_amount = 1
-    `;
-    const emailsQuery = `SELECT email FROM users`;
+//     try {
+//         const gases = await connectionInfo.promise().query(lowGasQuery);
+//         const emails = await connectionInfo.promise().query(emailsQuery);
+//         const allEmails = emails.map(user => user.email);
+
+//         if (gases.length > 0) {
+//             sendNotificationEmail("gas", gases, allEmails);
+//         }
+
+//         res.json({ lowGas: gases });
+//     } catch (err) {
+//         console.error("❌ Error fetching gas data:", err.message);
+//         res.status(500).json({ message: "Error fetching gas data" });
+//     }
+// };
+const gasNotifier = async (req = {}, res = { json: () => {}, status: () => ({ json: () => {} }) }) => {
+    const lowGasQuery = `SELECT * FROM gases WHERE gas_cylinders_amount <= 1`;
+    const emailsQuery = `SELECT user_email FROM users`;
 
     try {
-        const [gases] = await connectionInfo.promise().query(lowGasQuery);
-        const [emails] = await connectionInfo.promise().query(emailsQuery);
-        const allEmails = emails.map(user => user.email);
+        const [gasesRows] = await connectionInfo.promise().query(lowGasQuery);
+        const [emailRows] = await connectionInfo.promise().query(emailsQuery);
 
-        if (gases.length > 0) {
-            sendNotificationEmail("gas", gases, allEmails);
+        const allEmails = emailRows.map(user => user.user_email);
+        if (gasesRows.length > 0) {
+            await sendNotificationEmail("gas", gasesRows, allEmails);
         }
 
-        res.json({ lowGas: gases });
+        res.json({ lowGas: gasesRows });
     } catch (err) {
         console.error("❌ Error fetching gas data:", err.message);
         res.status(500).json({ message: "Error fetching gas data" });
@@ -124,12 +139,28 @@ export const gasNotifier = async (req = {}, res = { json: () => {}, status: () =
 };
 
 
-new Cron('0 */12 * * *', async () => {
+// new Cron('0 */12 * * *', async () => {
+//     try {
+//         // await chemicalNotifier();
+//         await gasNotifier();
+//         console.log("✅ Daily chemical and gas checks executed.");
+//     } catch (err) {
+//         console.error("❌ Scheduler error:", err.message);
+//     }
+// });
+
+new Cron('0 0 * * *', async () => {  // for midnight execution 
     try {
-        await chemicalNotifier();
-        await gasNotifier();
-        console.log("✅ Daily chemical and gas checks executed.");
+        await gasNotifier(); 
+        console.log("✅ Daily chemical and gas checks executed at midnight.");
     } catch (err) {
         console.error("❌ Scheduler error:", err.message);
     }
 });
+
+
+module.exports = {
+    // chemicalNotifier,
+    gasNotifier,
+    sendNotificationEmail
+};

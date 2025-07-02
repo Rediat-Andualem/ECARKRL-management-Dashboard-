@@ -1,5 +1,6 @@
-import connectionInfo from "../schema/db.config.js";
+// import connectionInfo from "../schema/db.config.js";
 
+const connectionInfo = require("../schema/db.config.js");
 
 const executeQuery = (query, params = []) => {
   return new Promise((resolve, reject) => {
@@ -15,7 +16,7 @@ const executeQuery = (query, params = []) => {
 
 
 
-export let consumables = async (req, res) => {
+let consumables = async (req, res) => {
     try {
         
         const imageFilePath = req.file ? req.file.path : 'not provided'; 
@@ -111,7 +112,7 @@ export let consumables = async (req, res) => {
 //     }
 // };
 
-export let getAllConsumables = async (req, res) => {
+let getAllConsumables = async (req, res) => {
   try {
     const rows = await executeQuery('SELECT * FROM consumables');
     res.status(200).json(rows);
@@ -119,4 +120,9 @@ export let getAllConsumables = async (req, res) => {
     console.error('Error fetching consumables:', error);
     res.status(500).json({ message: 'Failed to fetch consumables', error });
   }
+};
+
+module.exports = {
+consumables,
+getAllConsumables
 };

@@ -1,4 +1,6 @@
-import connectionInfo from "../schema/db.config.js";
+// import connectionInfo from "../schema/db.config.js";
+
+const connectionInfo = require("../schema/db.config.js");
 
 // Helper function to query the database
 const executeQuery = (query, params = []) => {
@@ -13,7 +15,7 @@ const executeQuery = (query, params = []) => {
   });
 };
 
-export let gasConsumed = async (req, res) => {
+let gasConsumed = async (req, res) => {
   const { gas_cylinders_consumed, gas_id} = req.body;
 console.log(gas_cylinders_consumed,gas_id)
   // Validate input
@@ -72,7 +74,7 @@ console.log(gas_cylinders_consumed,gas_id)
 
 
 
-export let getAllGasesCylinder = async (req, res) => {
+let getAllGasesCylinder = async (req, res) => {
   try {
     const rows = await executeQuery('SELECT * FROM gases');
     
@@ -85,4 +87,9 @@ export let getAllGasesCylinder = async (req, res) => {
       error: error.message
     });
   }
+};
+
+module.exports = {
+gasConsumed,
+getAllGasesCylinder
 };
