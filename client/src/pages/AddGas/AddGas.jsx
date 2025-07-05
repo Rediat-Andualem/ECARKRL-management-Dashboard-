@@ -16,7 +16,7 @@ function AddGas() {
     gas_receipt: null,
   });
 
-  const fileInputRef = useRef(null); // 👈 Ref for file input
+  const fileInputRef = useRef(null); 
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;

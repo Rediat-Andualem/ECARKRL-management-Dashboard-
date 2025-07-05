@@ -110,7 +110,9 @@ function ListOfGases() {
                 gas_id: singleGas.gas_id,
                 gas_cylinders_amount: singleGas.gas_cylinders_amount,
                 delivery_date: new Date(singleGas.updated_at).toLocaleDateString(),
-                gas_bill_path : singleGas.gas_bill_path
+                gas_bill_path : singleGas.gas_bill_path,
+                last_updated_by:singleGas.gas_consumed_by
+
               };
             })}
             columns={[
@@ -122,7 +124,8 @@ function ListOfGases() {
                 headerName: "Amount of Cylinders in stock",
                 width: 200,
               },
-              { field: "delivery_date", headerName: "Delivered on", width: 100 },
+              { field: "delivery_date", headerName: "Updated On", width: 100 },
+              { field: "last_updated_by", headerName: "Updated By", width: 100 },
               {
                 field: "Recept",
                 headerName: "Recept",

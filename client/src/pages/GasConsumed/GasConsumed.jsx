@@ -4,12 +4,16 @@ import { MDBContainer, MDBCol, MDBRow } from "mdb-react-ui-kit";
 import image from "../../image/cylinderForConsumedPage.png";
 import { toast, ToastContainer } from "react-toastify";
 import { FaFaceSadTear } from "react-icons/fa6";
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 function GasConsumed() {
   const [formData, setFormData] = useState({
     gas_cylinders_consumed: "",
     gas_id: "",
   });
 
+  const auth = useAuthUser();
+const userId = auth?.userID
+console.log(userId)
   const [cylinders, setCylinders] = useState([]);
 
   useEffect(() => {
@@ -36,12 +40,14 @@ function GasConsumed() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post("/gas-consumed", formData);
+      await axiosInstance.post("/gas-consumed", formData,  {
+          headers: { Authorization:  userId},
+        });
       toast.success("Gas consumption recorded successfully!");
       setFormData({ gas_cylinders_consumed: "", gas_id: "" });
     } catch (error) {
-      toast.error("Failed to submit gas consumption");
-      console.error(error);
+      toast.error(error?.response.data.message? error?.response.data.message : "Failed to submit gas consumption please try again");
+      // console.error(error?.response.data.message);
     }
   };
 
