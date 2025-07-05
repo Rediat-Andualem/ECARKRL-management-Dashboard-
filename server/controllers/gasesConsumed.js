@@ -16,8 +16,9 @@ const executeQuery = (query, params = []) => {
 };
 
 let gasConsumed = async (req, res) => {
-  const { gas_cylinders_consumed, gas_id} = req.body;
-console.log(gas_cylinders_consumed,gas_id)
+const { gas_cylinders_consumed, gas_id} = req.body;
+const userId = req.headers['authorization']
+
   // Validate input
   const isNumberRegex = /^\d+$/;
   if (!gas_cylinders_consumed || !gas_id) {
@@ -54,10 +55,16 @@ console.log(gas_cylinders_consumed,gas_id)
       gas_id,
     ]);
 
+
+      const [user_first_name]  = await executeQuery("SELECT user_first_name  FROM users WHERE user_id = ?", [userId]);
+    
+      const updatedBy = user_first_name.user_first_name
     // Insert the consumed gas record
-    await executeQuery("INSERT INTO gases_consumed (gas_id, gas_cylinders_consumed) VALUES (?)", [
-      [ gas_id, gas_cylinders_consumed],
+    await executeQuery("INSERT INTO gases_consumed (gas_id, gas_cylinders_consumed,gas_consumed_by) VALUES (?)", [
+      [ gas_id, gas_cylinders_consumed,updatedBy],
     ]);
+
+    await executeQuery("UPDATE gases SET gas_consumed_by = ? WHERE gas_id = ?", [updatedBy, gas_id]);
 
     // Send success response
     res.status(200).json({
