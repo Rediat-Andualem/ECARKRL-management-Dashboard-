@@ -1,0 +1,308 @@
+/* Complete redesign with glassmorphism and modern styling */
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Animated Background Blobs */
+.blob1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(240, 152, 25, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.blob2 {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  bottom: -50px;
+  left: -100px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.imageColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heroImage {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(240, 152, 25, 0.2);
+  animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.formColumn {
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 630px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  animation: slideInUp 0.8s ease-out;
+  /* Added overflow hidden to contain form elements */
+  overflow: hidden;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f09819 0%, #8a2be2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin: 0 0 1rem 0;
+}
+
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f09819, #8a2be2, transparent);
+  margin: 1.5rem 0 2rem 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  /* Added width constraint to prevent overflow */
+  width: 100%;
+  overflow: hidden;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input,
+.select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(240, 152, 25, 0.3);
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+/* Added styling for select options to be readable with dark background */
+.select option {
+  background: #1a1a2e;
+  color: #ffffff;
+  padding: 0.5rem;
+}
+
+.input::placeholder,
+.select option {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #f09819;
+  box-shadow: 0 0 20px rgba(240, 152, 25, 0.3);
+}
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}
+
+.fileUploadGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.uploadLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fileInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(240, 152, 25, 0.4);
+  border-radius: 10px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fileInputWrapper:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #f09819;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileInputPlaceholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  text-align: center;
+  width: 100%;
+}
+
+.fileInputWrapper:hover .fileInputPlaceholder {
+  color: #f09819;
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #f09819 0%, #8a2be2 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 20px rgba(240, 152, 25, 0.3);
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(240, 152, 25, 0.4);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contentWrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .imageColumn {
+    display: flex;
+    justify-content: center;
+    order: -1;
+  }
+
+  .formContainer {
+    padding: 2rem;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .blob1,
+  .blob2 {
+    width: 250px;
+    height: 250px;
+  }
+}

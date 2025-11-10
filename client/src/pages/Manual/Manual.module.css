@@ -1,0 +1,145 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a0a2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3rem 1.5rem;
+  font-family: "Segoe UI", "Roboto", "Oxygen", sans-serif;
+}
+
+.blob1 {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(240, 152, 25, 0.15), transparent 70%);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.blob2 {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.12), transparent 70%);
+  border-radius: 50%;
+  bottom: -50px;
+  left: -100px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f09819 0%, #8a2be2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.divider {
+  height: 3px;
+  width: 180px;
+  background: linear-gradient(90deg, transparent, #f09819, #8a2be2, transparent);
+  margin: 1rem auto 2.5rem;
+}
+
+.intro {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.8rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 1.8rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(240, 152, 25, 0.3);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  filter: drop-shadow(0 0 10px rgba(240, 152, 25, 0.3));
+}
+
+.cardTitle {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #f09819, #8a2be2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cardDesc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #f09819, #8a2be2);
+  color: white;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.downloadBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(240, 152, 25, 0.4);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  .intro {
+    font-size: 1rem;
+  }
+  .card {
+    padding: 1.5rem;
+  }
+}

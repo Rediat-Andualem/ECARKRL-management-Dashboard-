@@ -1,186 +1,201 @@
-import React, { useState } from "react";
-import styles from "./LandingPage.module.css";
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
+"use client"
 
-import AddChemicals from "../AddChemical/AddChemical";
-import AddGases from "../AddGas/AddGas";
-import ConsumeChemicals from "../AddConsumables/AddConsumables";
-import RegisterConsumables from "../AddConsumables/AddConsumables";
-import AddGasConsumed from "../GasConsumed/GasConsumed";
-import ListChemicals from "../ListChemicals/ListChemicals";
-import ListConsumables from "../ListConsumables/ListConsumables";
-import ListGases from "../ListGases/ListGases.jsx";
-import OldGasBills from "../OldGasBills/OldGasBills.jsx";
-import UserDisplay from "../UserDisplay/UserDisplay.jsx";
+import { useState } from "react"
+import styles from "./LandingPage.module.css"
+import useAuthUser from "react-auth-kit/hooks/useAuthUser"
+
+import AddChemicals from "../AddChemical/AddChemical"
+import AddGases from "../AddGas/AddGas"
+import ConsumeChemicals from "../AddConsumables/AddConsumables"
+import RegisterConsumables from "../AddConsumables/AddConsumables"
+import AddGasConsumed from "../GasConsumed/GasConsumed"
+import ListChemicals from "../ListChemicals/ListChemicals"
+import ListConsumables from "../ListConsumables/ListConsumables"
+import ListGases from "../ListGases/ListGases.jsx"
+import OldGasBills from "../OldGasBills/OldGasBills.jsx"
+import UserDisplay from "../UserDisplay/UserDisplay.jsx"
 
 function LandingPage() {
-  const userData = useAuthUser();
-  const [selectedComponent, setSelectedComponent] = useState(null);
+  const userData = useAuthUser()
+  const [selectedComponent, setSelectedComponent] = useState(null)
+  const [activeButton, setActiveButton] = useState(null)
 
-  // Function to handle button clicks and set the component
   const renderComponent = (componentName) => {
+    setActiveButton(componentName)
     switch (componentName) {
       case "AddChemicals":
-        setSelectedComponent(<AddChemicals />);
-        break;
+        setSelectedComponent(<AddChemicals />)
+        break
       case "AddGases":
-        setSelectedComponent(<AddGases />);
-        break;
+        setSelectedComponent(<AddGases />)
+        break
       case "ConsumeChemicals":
-        setSelectedComponent(<ConsumeChemicals />);
-        break;
+        setSelectedComponent(<ConsumeChemicals />)
+        break
       case "RegisterConsumables":
-        setSelectedComponent(<RegisterConsumables />);
-        break;
+        setSelectedComponent(<RegisterConsumables />)
+        break
       case "AddGasConsumed":
-        setSelectedComponent(<AddGasConsumed />);
-        break;
+        setSelectedComponent(<AddGasConsumed />)
+        break
       case "listChemicals":
-        setSelectedComponent(<ListChemicals />);
-        break;
+        setSelectedComponent(<ListChemicals />)
+        break
       case "listConsumables":
-        setSelectedComponent(<ListConsumables />);
-        break;
+        setSelectedComponent(<ListConsumables />)
+        break
       case "listGases":
-        setSelectedComponent(<ListGases />);
-        break;
+        setSelectedComponent(<ListGases />)
+        break
       case "oldGasBills":
-        setSelectedComponent(<OldGasBills />);
-        break;
+        setSelectedComponent(<OldGasBills />)
+        break
       case "listOfUsers":
-        setSelectedComponent(<UserDisplay />);
-        break;
+        setSelectedComponent(<UserDisplay />)
+        break
       default:
-        setSelectedComponent(null);
+        setSelectedComponent(null)
     }
-  };
+  }
 
   return (
-    <div className="d-flex">
-      {/* Left Side Navigation */}
-      <div className={`${styles.ch1}`}>
+    <div className={styles.container}>
+      {/* Left Side Navigation Sidebar */}
+      <aside className={styles.sidebar}>
         <div className={styles.profile}>
-          <h3>User Profile Detail</h3>
-          <h4>Name : {userData.displayName} </h4>
-          <h4>Email : {userData.userEmail} </h4>
-          <hr className={`text-white`} />
-          <div className="container p-5">
+          <div className={styles.profileHeader}>
+            <h3 className={styles.profileTitle}>User Profile</h3>
+          </div>
+          <div className={styles.profileInfo}>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Name:</span>
+              <span className={styles.infoValue}>{userData.displayName}</span>
+            </div>
+            <div className={styles.infoItem}>
+              <span className={styles.infoLabel}>Email:</span>
+              <span className={styles.infoValue}>{userData.userEmail}</span>
+            </div>
+          </div>
+
+          <div className={styles.divider}></div>
+
+          <div className={styles.buttonGroup}>
+            <div className={styles.sectionLabel}>REGISTER</div>
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "AddChemicals" ? styles.active : ""}`}
               onClick={() => renderComponent("AddChemicals")}
             >
               Register Chemicals
             </button>
-            <br />
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "AddGases" ? styles.active : ""}`}
               onClick={() => renderComponent("AddGases")}
             >
               Register Gas Cylinder
             </button>
-            <br />
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "RegisterConsumables" ? styles.active : ""}`}
               onClick={() => renderComponent("RegisterConsumables")}
             >
               Register Consumables
             </button>
-            {/* <br /> */}
-            <hr className={`text-white`} />
+          </div>
+
+          <div className={styles.divider}></div>
+
+          <div className={styles.buttonGroup}>
+            <div className={styles.sectionLabel}>TRACK</div>
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "AddGasConsumed" ? styles.active : ""}`}
               onClick={() => renderComponent("AddGasConsumed")}
             >
-              Gas cylinder consumed
+              Gas Cylinder Consumed
             </button>
-            <br />
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "oldGasBills" ? styles.active : ""}`}
               onClick={() => renderComponent("oldGasBills")}
             >
-              Old gas bills
+              Old Gas Bills
             </button>
-            <hr className={`text-white`} />
+          </div>
+
+          <div className={styles.divider}></div>
+
+          <div className={styles.buttonGroup}>
+            <div className={styles.sectionLabel}>SEARCH</div>
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "listChemicals" ? styles.active : ""}`}
               onClick={() => renderComponent("listChemicals")}
             >
               Search Chemicals
             </button>
-            <br />
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "listConsumables" ? styles.active : ""}`}
               onClick={() => renderComponent("listConsumables")}
             >
               Search Consumables
             </button>
-            <br />
             <button
-              className={styles.buttonStyle}
+              className={`${styles.buttonStyle} ${activeButton === "listGases" ? styles.active : ""}`}
               onClick={() => renderComponent("listGases")}
             >
               Search Gases
             </button>
-            {/* <br /> */}
-            <hr className="text-white" />
 
             {userData.userRole === "1" && (
-              <button
-                className={styles.buttonStyle}
-                onClick={() => renderComponent("listOfUsers")}
-              >
-                User Profile
-              </button>
+              <>
+                <div className={styles.divider}></div>
+                <button
+                  className={`${styles.buttonStyle} ${activeButton === "listOfUsers" ? styles.active : ""}`}
+                  onClick={() => renderComponent("listOfUsers")}
+                >
+                  User Profile
+                </button>
+              </>
             )}
           </div>
         </div>
-      </div>
+      </aside>
 
-      <div className={`${styles.ch2}`}>
-  {selectedComponent || (
-    <>
-      <h1 className="text-white m-4">Select an option from the left</h1>
-      <ul className={`text-white m-4 ${styles.forList}`}>
-        <li>
-          To register chemicals, select <strong>Register Chemicals</strong>.
-        </li>
-        <li>
-          To register gas cylinders, select{" "}
-          <strong>Register Gas Cylinder</strong>.
-        </li>
-        <li>
-          To register consumables, select{" "}
-          <strong>Register Consumables</strong>.
-        </li>
-        <li>
-          To deduct the amount of gas cylinder used, select{" "}
-          <strong>Gas Cylinder Consumed</strong>.
-        </li>
-        <li>
-          To see previous gas bills, select <strong>Old Gas Bills</strong>.
-        </li>
-        <li>
-          To see the list of chemicals in stock, select{" "}
-          <strong>Search Chemicals</strong>.
-        </li>
-        <li>
-          To search for consumables in stock, select{" "}
-          <strong>Search Consumables</strong>.
-        </li>
-        <li>
-          To see the gases available in stock, select{" "}
-          <strong>Search Gases</strong>.
-        </li>
-      </ul>
-    </>
-  )}
-
-  {/* Render the selected component if any */}
-  {/* {selectedComponent} */}
-</div>
-
+      {/* Right Side Main Content */}
+      <main className={styles.mainContent}>
+        {selectedComponent ? (
+          <div className={styles.contentWrapper}>{selectedComponent}</div>
+        ) : (
+          <div className={styles.welcomeSection}>
+            <h1 className={styles.welcomeTitle}>Welcome back!</h1>
+            <p className={styles.welcomeSubtitle}>Select an option from the sidebar to get started</p>
+            <ul className={styles.instructionsList}>
+              <li>
+                <strong>Register Chemicals:</strong> Add new chemicals to your inventory
+              </li>
+              <li>
+                <strong>Register Gas Cylinder:</strong> Register new gas cylinders
+              </li>
+              <li>
+                <strong>Register Consumables:</strong> Track consumable items
+              </li>
+              <li>
+                <strong>Gas Cylinder Consumed:</strong> Record gas usage and consumption
+              </li>
+              <li>
+                <strong>Old Gas Bills:</strong> View historical gas bills and records
+              </li>
+              <li>
+                <strong>Search Chemicals:</strong> Find chemicals in your current stock
+              </li>
+              <li>
+                <strong>Search Consumables:</strong> Look up consumables inventory
+              </li>
+              <li>
+                <strong>Search Gases:</strong> View available gases in stock
+              </li>
+            </ul>
+          </div>
+        )}
+      </main>
     </div>
-  );
+  )
 }
 
-export default LandingPage;
+export default LandingPage

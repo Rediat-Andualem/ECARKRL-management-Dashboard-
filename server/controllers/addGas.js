@@ -1,8 +1,3 @@
-// import connectionInfo from "../schema/db.config.js";
-// import fs from "fs";
-// import path from "path";
-// import { fileURLToPath } from "url";
-
 const connectionInfo = require("../schema/db.config.js");
 const fs = require("fs");
 const path = require("path");

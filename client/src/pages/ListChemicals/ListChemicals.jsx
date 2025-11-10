@@ -64,6 +64,7 @@ function ListChemicals() {
   const paginationModel = { page: 0, pageSize: 10};
   const detailPage = (chemicalId) => {
     navigate(`/chemicalDetails/${chemicalId}`);
+    // navigate(`/chemicalDetails/${id}`, { state: { from: "/dashboard/listChemicals" } });
   };
 
   function changeFormula(formula) {

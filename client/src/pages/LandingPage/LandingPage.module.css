@@ -1,65 +1,304 @@
+/* Complete redesign with modern glassmorphic effects and improved layout */
 
-.ch1{
-    background-color: #662249;
-    width: 500px;
-    /* height: 100vh; */
-    height: 100%;
-    margin: 10px 10px 10px 0px;
-    padding: 2%;
+.container {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  gap: 0;
+  overflow: hidden;
 }
 
-.ch2{
-    background-color: #413B61;
-    width: 100%;
-    /* height: 100vh; */
-    /* height: 100%; */
-    margin: 10px 10px 10px 0px;
+/* Sidebar Styling */
+.sidebar {
+  width: 420px;
+  height: 100vh;
+  overflow-y: auto;
+  background: rgba(102, 34, 73, 0.5);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(240, 152, 25, 0.2);
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(240, 152, 25, 0.4) transparent;
 }
-.profile h3{
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin: 10px;
-     text-decoration: underline;
-     color: wheat;
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
 }
-.profile h4{
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: wheat;
-  
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
 }
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(240, 152, 25, 0.4);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 152, 25, 0.6);
+}
+
+.profile {
+  padding: 32px 24px;
+}
+
+.profileHeader {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.profileTitle {
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f09819, #e75480);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.profileInfo {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(240, 152, 25, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  gap: 4px;
+}
+
+.infoItem:last-child {
+  margin-bottom: 0;
+}
+
+.infoLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(240, 152, 25, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoValue {
+  font-size: 14px;
+  color: #e8d5c4;
+  word-break: break-all;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 152, 25, 0.3), transparent);
+  margin: 20px 0;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(240, 152, 25, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.buttonGroup {
+  margin-bottom: 8px;
+}
+
 .buttonStyle {
-    display: block;
-    width: 220px;
-    height: 50px;
-    border: 1px solid black;
-    text-align: center;
-    text-decoration: none;
-    background-color: #F09819;
-    border-radius: 5px;
-    color: black;
-    font-weight: bold;
-    padding: 10px;
-
-    /* Add these: */
-    cursor: pointer; /* Ensures it's clickable */
-    outline: none; /* Prevents default focus styles */
-    border: none; /* Removes default button border */
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(240, 152, 25, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  color: #e8d5c4;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
-.buttonStyle:hover{
-    height: 50px;
-    border: 1px solid white;
-    background-color: #522C5D;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-
-}
-.buttonStyle span{
-    padding-top: 5px;
+.buttonStyle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(240, 152, 25, 0.3), transparent);
+  transition: left 0.5s ease;
 }
 
-.forList{
-    font-size: 20px;
+.buttonStyle:hover {
+  border-color: rgba(240, 152, 25, 0.6);
+  background: rgba(240, 152, 25, 0.15);
+  transform: translateX(4px);
+  color: #f09819;
+}
+
+.buttonStyle:hover::before {
+  left: 100%;
+}
+
+.buttonStyle.active {
+  background: linear-gradient(135deg, rgba(240, 152, 25, 0.3), rgba(231, 84, 128, 0.2));
+  border-color: rgba(240, 152, 25, 0.8);
+  color: #f09819;
+  box-shadow: 0 0 20px rgba(240, 152, 25, 0.3);
+}
+
+/* Main Content Area */
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(65, 59, 97, 0.5), rgba(48, 43, 99, 0.5));
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(240, 152, 25, 0.4) transparent;
+}
+
+.mainContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mainContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mainContent::-webkit-scrollbar-thumb {
+  background: rgba(240, 152, 25, 0.4);
+  border-radius: 3px;
+}
+
+.mainContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 152, 25, 0.6);
+}
+
+.contentWrapper {
+  padding: 32px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcomeSection {
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.welcomeTitle {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f09819, #e75480);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 16px 0;
+  letter-spacing: -1px;
+}
+
+.welcomeSubtitle {
+  font-size: 18px;
+  color: rgba(232, 213, 196, 0.7);
+  margin: 0 0 40px 0;
+  font-weight: 500;
+}
+
+.instructionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  max-width: 900px;
+  text-align: left;
+}
+
+.instructionsList li {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(240, 152, 25, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  color: #e8d5c4;
+  font-size: 14px;
+  line-height: 1.6;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.instructionsList li:hover {
+  border-color: rgba(240, 152, 25, 0.6);
+  background: rgba(240, 152, 25, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240, 152, 25, 0.1);
+}
+
+.instructionsList strong {
+  color: #f09819;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid rgba(240, 152, 25, 0.2);
+  }
+
+  .mainContent {
+    flex: 1;
+    height: auto;
+  }
+
+  .welcomeSection {
+    padding: 32px 24px;
+    min-height: auto;
+  }
+
+  .welcomeTitle {
+    font-size: 32px;
+  }
+
+  .welcomeSubtitle {
+    font-size: 16px;
+  }
+
+  .instructionsList {
+    grid-template-columns: 1fr;
+  }
 }

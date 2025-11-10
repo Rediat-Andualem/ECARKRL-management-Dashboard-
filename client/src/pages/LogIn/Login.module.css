@@ -1,138 +1,269 @@
-
-.background{
-  width: 430px;
-  height: 520px;
-  position: absolute;
-  transform: translate(-50%,-50%);
-  left: 50%;
-  top: 50%;
+.background {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #1a1625 0%, #2d1b4e 50%, #1a1625 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-.background .shape{
+
+/* Enhanced gradient shapes with better positioning and animation */
+.background .shape {
   height: 200px;
   width: 200px;
   position: absolute;
   border-radius: 50%;
-}
-.shape:first-child{
-  background: linear-gradient(
-      #1845ad,
-      #23a2f6
-  );
-  left: -80px;
-  top: -80px;
-}
-.shape:last-child{
-  background: linear-gradient(
-      to right,
-      #ff512f,
-      #f09819
-  );
-  right: -30px;
-  bottom: -80px;
+  opacity: 0.8;
 }
 
+.shape:first-child {
+  background: linear-gradient(135deg, #1845ad, #23a2f6);
+  left: -100px;
+  top: -100px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape:last-child {
+  background: linear-gradient(135deg, #ff512f, #f09819);
+  right: -50px;
+  bottom: -50px;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+/* Completely redesigned form with modern glassmorphism */
 .forForm {
-  height: 520px;
-  width: 400px;
-  background-color: #522C5D;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 50px 35px;
-  backdrop-filter: none; /* Remove blur from the form itself */
-}
-.sideView{
-  background-color: brown;
+  height: auto;
+  width: 420px;
+  background: rgba(82, 44, 93, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 50px 40px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
 }
 
-.space{
-  margin: 10px;
-  color: #f09819;
+.forForm:hover {
+  box-shadow: 0 12px 48px 0 rgba(240, 152, 25, 0.2);
 }
-.forForm label{
-  color: white;
-}
-.title{
-  color: white;
-}
-.forForm h3{
+
+/* Enhanced title with better typography */
+.forForm h3 {
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 42px;
   text-align: center;
+  color: white;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
 }
-.Link{
-  color: black;
-  font-size: 15px;
-  margin: 1%;
-  text-decoration: none;
+
+/* Added subtitle for better context */
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 0 0 30px 0;
+  font-weight: 400;
 }
-.forForm label{
+
+/* New form group styling for better spacing */
+.formGroup {
+  margin-bottom: 24px;
+}
+
+/* Improved label styling */
+.forForm label {
   display: block;
-  margin-top: 30px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.forForm input{
+
+/* Enhanced input fields with modern styling */
+.forForm input {
   display: block;
   height: 50px;
   width: 100%;
-  /* background-color: rgba(255,255,255,0.07); */
-  border-radius: 3px;
-  padding: 0 10px;
-  margin-top: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.forForm input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.forForm input:focus {
+  outline: none;
+  border-color: #f09819;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(240, 152, 25, 0.3);
+}
+
+/* Styled message boxes for feedback */
+.messageBox {
+  background-color: rgba(240, 152, 25, 0.15);
+  border: 1px solid #f09819;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.responseMessage {
+  color: #f09819;
+  font-weight: 600;
   font-size: 14px;
-  font-weight: 300;
 }
-input ::placeholder{
-  color: black;
+
+.errorBox {
+  background-color: rgba(220, 53, 69, 0.15);
+  border: 1px solid #dc3545;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
 }
-.button{
+
+.errorMessage {
+  color: #ff6b6b;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Modern button with hover and active states */
+.forForm button {
+  margin-top: 30px;
+  width: 100%;
+  background: linear-gradient(135deg, #f09819 0%, #f5a946 100%);
+  color: white;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(240, 152, 25, 0.3);
+}
+
+.forForm button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(240, 152, 25, 0.4);
+  background: linear-gradient(135deg, #f5a946 0%, #f09819 100%);
+}
+
+.forForm button:active:not(:disabled) {
+  transform: translateY(0px);
+}
+
+.forForm button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Enhanced "Forgot Password" link */
+.Forgot {
+  display: inline-block;
+  color: #ed9e59;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 16px 0;
+  transition: all 0.3s ease;
+}
+
+.Forgot:hover {
+  color: #f09819;
+  text-decoration: underline;
+}
+
+/* Improved signup link styling */
+.space {
+  margin: 24px 0 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.Link {
+  color: #f09819;
+  font-size: 15px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  margin-left: 4px;
+}
+
+.Link:hover {
+  color: #f5a946;
+  text-decoration: underline;
+}
+
+/* Kept but not used social styles for future use */
+.social {
+  margin-top: 30px;
+  display: flex;
+}
+
+.social div {
+  width: 150px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.social div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.social .fb {
+  margin-left: 25px;
+}
+
+.social i {
+  margin-right: 4px;
+}
+
+.title {
+  color: white;
+}
+
+.sideView {
+  background-color: brown;
+}
+
+.button {
   width: 300px !important;
   margin: 1%;
   background-color: #f09819 !important;
-}
-.forForm button{
-  margin-top: 50px;
-  width: 100%;
-  background-color: #ffffff;
-  color: #080710;
-  padding: 15px 0;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.social{
-margin-top: 30px;
-display: flex;
-}
-.social div{
-background: red;
-width: 150px;
-border-radius: 3px;
-padding: 5px 10px 10px 5px;
-background-color: rgba(255,255,255,0.27);
-/* color: #eaf0fb; */
-text-align: center;
-}
-.social div:hover{
-background-color: rgba(255,255,255,0.47);
-}
-.social .fb{
-margin-left: 25px;
-}
-.social i{
-margin-right: 4px;
-}
-.Forgot{
-  color: #ed9e59;
-  font-size: 15px;
-  text-decoration: none;
-  font-weight: bold;
-  padding-top: 15px;
 }
