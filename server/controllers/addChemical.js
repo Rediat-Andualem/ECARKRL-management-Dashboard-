@@ -16,7 +16,8 @@ const executeQuery = (query, params = []) => {
 
 
 const validateChemicalFields = (data) => { 
- const isStringRegex = /^[A-Za-z\s]+$/;
+const isStringRegex = /^[A-Za-z0-9,\-\s]+$/;
+
     const isNumberRegex = /^\d+$/;
     const monthAndYear = /^(0[1-9]|1[0-2])\/\d{4}$/;
 
